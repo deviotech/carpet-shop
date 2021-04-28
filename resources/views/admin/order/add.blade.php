@@ -18,6 +18,24 @@
     	height: calc(2.0rem + 1px) !important;
     	background: #fff;
 	}
+	form .form-group select.form-control
+	{
+		position: relative !important;
+	}
+	.hidden
+	{
+		display: none;
+	}
+	#new-trim label
+	{
+		position: relative !important;
+		color: black;
+	}
+	#new-underlay label
+	{
+		position: relative !important;
+		color: black;
+	}
 </style>
 @endsection
 @section('content')
@@ -294,11 +312,238 @@
 			                        </table>
 			                    </div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 text-right">
-								<button type="button" class="btn btn-primary add-area">+ More Area</button>
+							<div class="row">
+								<div class="col-md-12 text-right">
+									<button type="button" class="btn btn-primary add-area">+ More Area</button>
+								</div>
 							</div>
+						</div>
+						<div class="tab-pane" id="survey">
+							<form method="" action="">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Sub Floor type</label>
+											<select name="floor_type" class="form-control">
+												<option selected disabled>Select One</option>
+												<option value="Concrete">Concrete</option>
+												<option value="Wood">Wood</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Build type</label>
+											<select name="build_type" class="form-control">
+												<option selected disabled>Select One</option>
+												<option value="New">New</option>
+												<option value="Old">Old</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Moisture Reading Needed?</label>
+											<select name="moisture" class="form-control moisture">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 moisture_per hidden">
+										<div class="form-group">
+											<label>Moisture reading %</label>
+											<input type="text" name="moisture_per" class="form-control" placeholder="Enter Moisture Reading %">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Underfloor heating?</label>
+											<select name="underfloor" class="form-control">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Screed required?</label>
+											<select name="screed" class="form-control screed">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 screed_detail hidden">
+										<div class="form-group">
+											<label>Screed details</label>
+											<input type="text" name="screed_detail" class="form-control" placeholder="Enter Screed Detail">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Door Saddles in place?</label>
+											<select name="saddles" class="form-control saddles">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 door_saddles hidden">
+										<div class="form-group">
+											<label>Door Saddles need to uplifted</label>
+											<select name="saddles_uplifted" class="form-control saddles_uplifted">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Skirting in place ?</label>
+											<select name="skirting" class="form-control skirting">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 action_skit hidden">
+										<div class="form-group">
+											<label>Action on skirting</label>
+											<select name="action_skit" class="form-control">
+												<option selected disabled>Select One</option>
+												<option value="Reuse">Reuse</option>
+												<option value="Replace">Replace</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Stairs?</label>
+											<select name="stairs" class="form-control stairs">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 stairs_yes hidden">
+										<div class="form-group">
+											<label>Runner</label>
+											<select name="runner" class="form-control runner">
+												<option value="Yes">Yes</option>
+												<option value="No" selected>No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 runner_yes hidden">
+										<div class="form-group">
+											<label>Binding Type</label>
+											<select name="binding" class="form-control binding">
+												<option selected disabled>Select One</option>
+												<option value="Cotton">Cotton</option>
+												<option value="Yarn">Yarn</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Rods</label>
+											<select name="rods" class="form-control rods">
+												<option value="Yes">Yes</option>
+												<option value="No" selected>No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 rods_yes hidden">
+										<div class="form-group">
+											<label>Rods type</label>
+											<input type="text" name="rods_type" class="form-control rods_type" placeholder="Enter Rods Type">
+										</div>
+									</div>
+									<div class="col-md-6 rods_yes hidden">
+										<div class="form-group">
+											<label>Rods size</label>
+											<input type="text" name="rods_size" class="form-control rods_size" placeholder="Enter Rods Size">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Uplift + Dispose old material</label>
+											<select name="rods" class="form-control rods">
+												<option value="Yes" selected>Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row underlay-row" id="underlay-1">
+									<div class="col-md-12">
+										<div class="remove-btn-under text-right"></div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Underlay <font class="new-count">1</font></label>
+											<input type="text" name="underlay[]" class="form-control" placeholder="Enter Underlay..">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Area</label>
+											<input type="text" name="area[]" class="form-control" placeholder="Enter Area..">
+										</div>
+									</div>
+								</div>
+								<div id="new-underlay">
+									
+								</div>
+									
+								<div class="row">
+									<div class="col-md-12 text-right">
+										<button type="button" class="btn btn-primary btn-sm add-underlay">+ Add Underlay Type</button>
+									</div>
+								</div>
+
+								<div class="row trim-row" id="trim-1">
+									<div class="col-md-12">
+										<div class="remove-btn-trim text-right"></div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Trim <font class="new-count-2">1</font></label>
+											<input type="text" name="trim[]" class="form-control" placeholder="Enter Trim..">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Area</label>
+											<input type="text" name="trim_area[]" class="form-control" placeholder="Enter Area..">
+										</div>
+									</div>
+								</div>
+								<div id="new-trim">
+									
+								</div>
+									
+								<div class="row">
+									<div class="col-md-12 text-right">
+										<button type="button" class="btn btn-primary btn-sm add-trim">+ Add Trim Detail</button>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane" id="intial_enquiry">
+							<form method="" action="">
+								<div class="row">
+									
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -348,6 +593,140 @@
             $('.add-area').fadeIn();
         count--;
     });
-    
+    $(document).on('change', '.moisture', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.moisture_per').removeClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.moisture_per').addClass('hidden');
+    	}
+    });
+    $(document).on('change', '.screed', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.screed_detail').removeClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.screed_detail').addClass('hidden');
+    	}
+    });
+    $(document).on('change', '.saddles', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.door_saddles').removeClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.door_saddles').addClass('hidden');
+    	}
+    });
+    $(document).on('change', '.skirting', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.action_skit').removeClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.action_skit').addClass('hidden');
+    	}
+    });
+    $(document).on('change', '.stairs', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.stairs_yes').removeClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.stairs_yes').addClass('hidden');
+    	}
+    });
+    $(document).on('change', '.runner', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.runner_yes').removeClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.runner_yes').addClass('hidden');
+    	}
+    });
+    $(document).on('change', '.rods', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.rods_yes').removeClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.rods_yes').addClass('hidden');
+    	}
+    });
+
+    var under= 1;
+	var new_count= 1;
+	$(document).on('click','.add-underlay',function(){
+		var new_count = $('.new-count').length;
+		if(new_count<3)
+		{
+			var content = $('#underlay-1').html();
+			$('#new-underlay').append('<div class="row new-underlay" id="underlay-'+(under+1)+'">'+content+'</div>');
+	            $('#underlay-'+(under+1)).find('input').val("");
+	            // md.initFormExtendedDatetimepickers();
+	            $('#underlay-'+(under+1)).find('.new-count').text(new_count+1);
+	            $('#underlay-'+(under+1)).find('.remove-btn-under').append('<button type="button" class="remove-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>');
+		}
+		new_count++;
+		under++;
+		if(new_count == 3)
+                $(this).fadeOut();
+	});
+
+	$(document).on('click', '.remove-btn-under', function(){
+		var new_count = $('.new-count').length;
+        $(this).closest('.new-underlay').remove();
+        var align = 1;
+        $('.new-trim').each(function(){
+            $(this).find('.new-count').text(align);
+            align++;
+        });
+        if(new_count == 3)
+            $('.add-underlay').fadeIn();
+        new_count--;
+    });
+
+    var trim= 1;
+	var new_count_2= 1;
+	$(document).on('click','.add-trim',function(){
+		var new_count_2 = $('.new-count-2').length;
+		if(new_count_2<3)
+		{
+			var content = $('#trim-1').html();
+
+			$('#new-trim').append('<div class="row new-trim" id="trim-'+(trim+1)+'">'+content+'</div>');
+	            $('#trim-'+(trim+1)).find('input').val("");
+	            // md.initFormExtendedDatetimepickers();
+	            $('#trim-'+(trim+1)).find('.new-count-2').text(new_count_2+1);
+	            $('#trim-'+(trim+1)).find('.remove-btn-trim').append('<button type="button" class="remove-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>');
+		}
+		new_count_2++;
+		trim++;
+		if(new_count_2 == 3)
+                $(this).fadeOut();
+	});
+
+	$(document).on('click', '.remove-btn-trim', function(){
+		var new_count_2 = $('.new-count-2').length;
+        $(this).closest('.new-trim').remove();
+        var align = 1;
+        $('.new-trim').each(function(){
+            $(this).find('.new-count-2').text(align);
+            align++;
+        });
+        if(new_count_2 == 3)
+            $('.add-trim').fadeIn();
+        new_count_2--;
+    });
 </script>
 @endsection
