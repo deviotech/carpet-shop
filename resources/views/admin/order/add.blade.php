@@ -541,7 +541,108 @@
 						<div class="tab-pane" id="intial_enquiry">
 							<form method="" action="">
 								<div class="row">
-									
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>To measure unscheduled</label>
+											<select name="unscheduled" class="form-control unscheduled">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 unscheduled_yes hidden">
+										<label>Estimate date</label>
+										<input type="text" name="un_estimate_date" class="form-control datepicker">
+									</div>
+									<div class="col-md-6">
+										<label>To Measure scheduled</label>
+										<input type="text" name="sc_estimate_date" class="form-control datepicker">
+									</div>
+									<div class="col-md-6">
+										<label>Price given to customer (Quoted)</label>
+										<input type="text" name="price" class="form-control" placeholder="Enter price, detail etc..">
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Job Agreed</label>
+											<select name="job" class="form-control job">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 job_yes hidden">
+										<label>Calendar for install date</label>
+										<input type="text" name="Install_date" class="form-control datepicker">
+									</div>
+									<div class="col-md-6 job_no hidden">
+										<label>Comment</label>
+										<input type="text" name="comment" class="form-control">
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Job Schedule</label>
+											<select name="job_schedule" class="form-control job_schedule">
+												<option selected disabled>Select One</option>
+												<option value="Yes">Yes</option>
+												<option value="No">No</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12 job_schedule_no hidden">
+										<label>Full Job Comment</label>
+										<textarea rows="3" name="full_comment" class="form-control" placeholder="Enter Full Job Comment ..."></textarea>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="tab-pane" id="payment">
+							<form method="" action="">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Total Value</label>
+											<input type="number" name="total" class="form-control total" placeholder="Enter Total Value..">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Payment Comment</label>
+											<input type="text" name="total_comment" class="form-control" placeholder="Enter Comment Here..">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Initial Deposit</label>
+											<input type="number" name="intial_dep" class="form-control deposit" placeholder="Enter Intial Deposit..">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Payment Comment</label>
+											<input type="text" name="int_comment" class="form-control" placeholder="Enter Comment Here..">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Additonal Payments</label>
+											<input type="number" name="add_payment" class="form-control additonal" placeholder="Enter Additonal Payment..">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Payment Comment</label>
+											<input type="text" name="add_comment" class="form-control" placeholder="Enter Comment Here..">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Balance Due</label>
+											<input type="number" name="add_comment" class="form-control balance" readonly>
+										</div>
+									</div>
 								</div>
 							</form>
 						</div>
@@ -663,6 +764,38 @@
     		$('.rods_yes').addClass('hidden');
     	}
     });
+    $(document).on('change', '.unscheduled', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.unscheduled_yes').removeClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.unscheduled_yes').addClass('hidden');
+    	}
+    });
+    $(document).on('change', '.job', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.job_yes').removeClass('hidden');
+    		$('.job_no').addClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.job_no').removeClass('hidden');
+    		$('.job_yes').addClass('hidden');
+    	}
+    });
+    $(document).on('change', '.job_schedule', function(){
+    	if($(this).val() == "Yes")
+    	{
+    		$('.job_schedule_no').addClass('hidden');
+    	}
+    	if($(this).val() == "No")
+    	{
+    		$('.job_schedule_no').removeClass('hidden');
+    	}
+    });
 
     var under= 1;
 	var new_count= 1;
@@ -727,6 +860,13 @@
         if(new_count_2 == 3)
             $('.add-trim').fadeIn();
         new_count_2--;
+    });
+    $(document).on('keyup', '.total, .deposit, .additonal', function(){
+    	var total = $('.total').val();
+    	var deposit = $('.deposit').val();
+    	var additonal = $('.additonal').val();
+    	var balance = total - deposit - additonal;
+    	$('.balance').val(balance);
     });
 </script>
 @endsection
