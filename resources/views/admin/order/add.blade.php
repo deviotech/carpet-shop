@@ -36,6 +36,11 @@
 		position: relative !important;
 		color: black;
 	}
+	#new-product label
+	{
+		position: relative !important;
+		color: black;
+	}
 </style>
 @endsection
 @section('content')
@@ -215,20 +220,24 @@
 							</form>
 						</div>
 						<div class="tab-pane" id="material">
-							<div class="row first-row">
+							<div class="row product-row" id="product-1">
 								<div class="col-md-12">
-									<div class="form-group product">
-										<label>Product <font class="p-count">1</font> viewed</label>
-										<input type="text" name="product[]" class="form-control" placeholder="Enter Product Name">	
+									<div class="remove-btn-prod text-right"></div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label>Product <font class="prod-count">1</font></label>
+										<input type="text" name="product[]" class="form-control" placeholder="Enter Product..">
 									</div>
 								</div>
 							</div>
-							<div class="second">
+							<div id="new-product">
 								
 							</div>
+									
 							<div class="row">
 								<div class="col-md-12 text-right">
-									<button type="submit" class="btn btn-primary submit">Add Product</button>
+									<button type="button" class="btn btn-primary btn-sm add-product">+ Add Product</button>
 								</div>
 							</div>
 						</div>
@@ -643,6 +652,12 @@
 											<input type="number" name="add_comment" class="form-control balance" readonly>
 										</div>
 									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Status</label>
+											<input type="text" name="status" class="form-control status" readonly>
+										</div>
+									</div>
 								</div>
 							</form>
 						</div>
@@ -654,11 +669,37 @@
 @endsection
 @section('js')
 <script>
-	$(document).on('click','.submit',function(e){
-		e.preventDefault();
-		var code= $('.product').html();
-		$('.first-row').append('<div class="col-md-12">'+code+'</div>');
+	var product= 1;
+	var prod_count= 1;
+	$(document).on('click','.add-product',function(){
+		var prod_count = $('.prod-count').length;
+		if(prod_count<10)
+		{
+			var content = $('#product-1').html();
+			$('#new-product').append('<div class="row product-row" id="product-'+(product+1)+'">'+content+'</div>');
+	            $('#product-'+(product+1)).find('input').val("");
+	            // md.initFormExtendedDatetimepickers();
+	            $('#product-'+(product+1)).find('.prod-count').text(prod_count+1);
+	            $('#product-'+(product+1)).find('.remove-btn-prod').append('<button type="button" class="remove-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>');
+		}
+		prod_count++;
+		product++;
+		if(prod_count == 10)
+                $(this).fadeOut();
 	});
+
+	$(document).on('click', '.remove-btn-prod', function(){
+		var prod_count = $('.prod-count').length;
+        $(this).closest('.product-row').remove();
+        var align = 1;
+        $('.new-product').each(function(){
+            $(this).find('.prod-count').text(align);
+            align++;
+        });
+        if(prod_count == 10)
+            $('.add-product').fadeIn();
+        prod_count--;
+    });
 
 	var row= 1;
 	var count= 1;
@@ -867,6 +908,19 @@
     	var additonal = $('.additonal').val();
     	var balance = total - deposit - additonal;
     	$('.balance').val(balance);
+
+    	if(balance == 0)
+    	{
+    		$('.status').val("Fully Paid");
+    	}
+    	else if(balance == total)
+    	{
+    		$('.status').val("Total Due");
+    	}
+    	else if(balance < total)
+    	{
+    		$('.status').val("Part Paid");
+    	}
     });
 </script>
 @endsection
