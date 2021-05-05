@@ -92,7 +92,9 @@
 					</div>
 				</div>
 				<div class="card-body">
-                    <form method="POST" action="{{ route('admin.order.create') }}" >
+                    <form method="POST" action="{{ route('admin.order.edit.post.order', $orders->id) }}" >
+                        <input type="hidden" name="order_id" class="form-control datepicker" value="{{ $orders->id }}">
+
                         @csrf
 					<div class="tab-content">
                     	<div class="tab-pane active" id="information">
@@ -101,7 +103,7 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Date of Enquiry</label>
-											<input type="text" name="enquiry_date" class="form-control datepicker">
+											<input type="text" name="enquiry_date" class="form-control datepicker" value="{{ $orders->enquiry_date }}">
 
 										</div>
                                               @error('enquiry_date')
@@ -111,21 +113,25 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Enquiry Number</label>
-											<input type="text" name="enquiry_number" class="form-control">
+											<input type="text" name="enquiry_num" class="form-control" value="{{ $orders->enquiry_number }}" >
 										</div>
 										                                               @error('enquiry_number')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 
 									</div>
-
+{{--  {{$pro_cat->category_id == $item->id ? 'selected' : ""}}  --}}
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Tower Contract</label>
-											<select name="tower_contract" class="form-control select2">
+											<select name="staff" class="form-control select2">
 												<option selected disabled>Select One..</option>
-												@foreach($list as $item)
-												<option value="{{$item->id}}">{{$item->name}}</option>
+												@foreach(stafff() as $item)
+                @if($orders->tower_contract == $item->id)
+                  <option selected="" value="{{ $item->id }}">{{ $item->name }}</option>
+                @else
+                  <option value="{{ $item->id }}">{{ $item->name }}</option>
+                @endif
 												@endforeach
 											</select>
 										</div>
@@ -140,7 +146,7 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Name 1</label>
-											<input type="text" name="cust_cont_name_1" class="form-control">
+											<input type="text" value="{{ $orders->cust_cont_name_1 }}" name="cust_name_1" class="form-control">
 										</div>
                                         	                                               @error('cust_cont_name_1')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -149,66 +155,53 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Mobile 1</label>
-											<input type="text" name="cust_cont_mobile_1" class="form-control">
+											<input type="text" name="cust_mobile_1" value="{{ $orders->cust_cont_mobile_1 }}" class="form-control">
 										</div>
-                                         @error('cust_cont_mobile_1')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Email 1</label>
-											<input type="text" name="cust_cont_email_1" class="form-control">
+											<input type="text" name="cust_email_1" value="{{ $orders->cust_cont_email_1 }}" class="form-control">
 										</div>
-                                            @error('cust_cont_email_1')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Address 1</label>
-											<input type="text" name="cust_cont_address_1" class="form-control">
+											<input type="text" name="address_1" value="{{ $orders->cust_cont_address_1 }}" class="form-control">
 										</div>
-                                               @error('cust_cont_address_1')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Address 2</label>
-											<input type="text" name="address_2" class="form-control">
+											<input type="text" name="address_2" value="{{ $orders->cust_cont_address_2 }}" class="form-control">
 										</div>
-
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Eircode</label>
-											<input type="text" name="aircode_1" class="form-control">
+											<input type="text" name="eircode"  value="{{ $orders->aircode_1 }}"class="form-control">
 										</div>
-                                                  @error('aircode_1')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Name 2</label>
-											<input type="text" name="cust_name_2" class="form-control">
+											<input type="text" name="cust_name_2" value="{{ $orders->cust_cont_name_2 }}" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Mobile 2</label>
-											<input type="text" name="cust_mobile_2" class="form-control">
+											<input type="text" name="cust_mobile_2" value="{{ $orders->cust_cont_mobile_2 }}" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Email 2</label>
-											<input type="text" name="cust_email_2" class="form-control">
+											<input type="text" name="cust_email_2" value="{{ $orders->cust_cont_email_2 }}" class="form-control">
 										</div>
 									</div>
 								</div>
@@ -216,22 +209,19 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Address 1</label>
-											<input type="text" name="sec_address_1" class="form-control">
+											<input type="text" name="sec_address_1" value="{{ $orders->cust_cont_address_3 }}"class="form-control">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Address 2</label>
-											<input type="text" name="sec_address_2" class="form-control">
+											<input type="text" name="sec_address_2" value="{{ $orders->cust_cont_address_4 }}" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Eircode</label>
-											<input type="text" name="aircode_2" class="form-control">
-                                                         @error('aircode_2')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+											<input type="text" name="eircode2" value="{{ $orders->aircode_2 }}" class="form-control">
 										</div>
 									</div>
 								</div>
@@ -240,8 +230,9 @@
 										<div class="form-group">
 											<label>Area Type</label>
 											<select name="area_type" class="form-control select2">
-												<option value="residential" selected> Residential</option>
-												<option value="commercial"> Commercial</option>
+
+												<option    value="residential"   @if($orders->area_type == 'residential') selected @endif> Residential</option>
+												<option value="commercial"  @if($orders->area_type == 'commercial') selected @endif> Commercial</option>
 											</select>
 										</div>
 									</div>
@@ -249,29 +240,74 @@
 
 
 						</div>
+
+
 						<div class="tab-pane" id="material">
-							<div class="row product-row" id="product-1">
+
+							<div class="row product-row " id="product-1">
 								<div class="col-md-12">
-									<div class="remove-btn-prod text-right"></div>
+									<div class="remove-btn-prod  text-right"></div>
 								</div>
+
 								<div class="col-md-12">
 									<div class="form-group">
+
+
+
 										<label>Product <font class="prod-count">1</font></label>
-										<input type="text" name="product[]" class="form-control" placeholder="Enter Product..">
-									</div>
+
+										<input type="text" name="product[]" value="{{ $orders->products[0]["product"] ?? '' }}" class="form-control" placeholder="Enter Product..">
+
+
+                                    </div>
 								</div>
-							</div>
-							<div id="new-product">
+
 
 							</div>
+{{--  @endforeach  --}}
+							<div id="new-product">
+  @foreach($orders->products as $product)
+
+  @if($loop->iteration!=1)
+
+
+							<div class="row product-row " id="product-{{ $loop->iteration }}">
+								<div class="col-md-12">
+									<div class="remove-btn-prod delete text-right">
+						 <button type="button" class="btn remove-row btn-sm btn-danger float-right"><i class="fa fa-times"></i></button>
+
+									</div>
+
+								</div>
+
+								<div class="col-md-12">
+									<div class="form-group">
+
+
+
+										<label>Product <font class="prod-count"> {{ $loop->iteration }}</font></label>
+
+										<input type="text" name="product[]" value="{{ $product->product }}" class="form-control" placeholder="Enter Product..">
+
+                                    </div>
+								</div>
+
+
+							</div>
+                            @endif
+@endforeach
+							</div>
+
 
 							<div class="row">
 								<div class="col-md-12 text-right">
 									<button type="button" class="btn btn-primary btn-sm add-product">+ Add Product</button>
 								</div>
 							</div>
-						</div>
-						<div class="tab-pane" id="area">
+
+                        </div>
+
+<div class="tab-pane" id="area">
 							<div class="row">
 								<div class="table-responsive">
 			                        <table id="area-table" class="table table-bordered">
@@ -292,58 +328,119 @@
 			                                </tr>
 			                            </thead>
 			                            <tbody>
+
 			                            	<tr class="new-row" id="t-row-1">
 			                            		<td> <font class="count">1</font></td>
 			                            		<td>
-			                            			<input type="text" name="area_name[]" class="form-control">
+			                            			<input type="text" value="{{ $orders->AreaDetail[0]['area_name'] ?? ''}}" name="area_name[]" class="form-control">
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="length[]" class="form-control">
+			                            			<input type="text" name="length[]"  value="{{ $orders->AreaDetail[0]['length_in_m'] ?? ''}}" class="form-control">
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="width[]" class="form-control">
+			                            			<input type="text" name="width[]"  value="{{ $orders->AreaDetail[0]['width_in_m'] ?? '' }}" class="form-control">
 			                            		</td>
 			                            		<td>
 			                            			<select name="type[]" class="form-control">
 			                            				<option  selected value="" >Select One..</option>
-			                            				<option value="wood">Wood</option>
-			                            				<option value="lvt">LVT</option>
-			                            				<option value="carpet">Carpet</option>
+			                            				<option value="wood" @if($orders->AreaDetail[0]['type']  == 'wood') selected @endif>Wood</option>
+			                            				<option value="lvt"  @if($orders->AreaDetail[0]['type'] == 'lvt') selected @endif>LVT</option>
+			                            				<option value="carpet"  @if($orders->AreaDetail[0]['type'] == 'carpet') selected @endif >Carpet</option>
 			                            			</select>
 			                            		</td>
 			                            		<td>
 			                            			<select name="material[]" class="form-control">
-			                            				<option selected value="">Select One..</option>
-			                            				<option value="rose_white">Rose White</option>
-			                            				<option value="ulister">ULster</option>
+			                            				<option selected value="" >Select One..</option>
+			                            				<option value="rose white"  @if($orders->AreaDetail[0]['material_chosen'] == 'rose white') selected @endif>Rose White</option>
+			                            				<option value="ulister"  @if($orders->AreaDetail[0]['material_chosen'] == 'ulister') selected @endif>ULster</option>
 			                            			</select>
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="exp_date[]" class="form-control datepicker">
+			                            			<input type="text" name="exp_date[]" value="{{ $orders->AreaDetail[0]['expected_material_delivery'] }}" class="form-control datepicker">
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="sch_date[]" class="form-control datepicker">
+			                            			<input type="text" name="sch_date[]"  value="{{ $orders->AreaDetail[0]['scheduled_fit_date'] }}" class="form-control datepicker">
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="room_price[]" class="form-control">
+			                            			<input type="text" name="room_price[]" value="{{ $orders->AreaDetail[0]['room_price'] }}" class="form-control">
 			                            		</td>
 			                            		<td>
 			                            			<select name="going_ahead[]" class="form-control">
-			                            				<option selected value="">Select One..</option>
-			                            				<option value="Yes">Yes</option>
-			                            				<option value="No">No</option>
+			                            				<option selected value="" >Select One..</option>
+			                            				<option value="Yes" @if($orders->AreaDetail[0]['going_ahead']  == 'Yes') selected @endif>Yes</option>
+			                            				<option value="No" @if($orders->AreaDetail[0]['going_ahead']  == 'No') selected @endif>No</option>
 			                            			</select>
 			                            		</td>
 			                            		<td>
 			                            			<select name="fit_complete[]" class="form-control">
 			                            				<option value='' selected >Select One..</option>
-			                            				<option value="Yes">Yes</option>
-			                            				<option value="No">No</option>
+			                            				<option value="Yes" @if($orders->AreaDetail[0]['fit_complete']  == 'Yes') selected @endif>Yes</option>
+			                            				<option value="No" @if($orders->AreaDetail[0]['fit_complete']  == 'No') selected @endif>No</option>
 			                            			</select>
 			                            		</td>
 			                            		<td class="remove-btn"></td>
 			                            	</tr>
 
+                                            @foreach($orders->AreaDetail as $area)
+
+
+@if($loop->iteration!=1)
+	<tr class="new-row" id="t-row-{{ $loop->iteration }}">
+
+			                            		<td> <font class="count">{{ $loop->iteration }}</font>
+			                            		<td>
+			                            			<input type="text" value="{{ $area->area_name}}" name="area_name[]" class="form-control">
+			                            		</td>
+			                            		<td>
+			                            			<input type="text" name="length[]" value="{{ $area->length_in_m}}" class="form-control">
+			                            		</td>
+			                            		<td>
+			                            			<input type="text" name="width[]" value="{{ $area->width_in_m}}" class="form-control">
+			                            		</td>
+			                            		<td>
+			                            			<select name="type[]" class="form-control">
+			                            				<option  selected value="" >Select One..</option>
+			                            				<option value="wood" @if($area->type  == 'wood') selected @endif>Wood</option>
+			                            				<option value="lvt"  @if($area->type == 'lvt') selected @endif>LVT</option>
+			                            				<option value="carpet"  @if($area->type == 'carpet') selected @endif >Carpet</option>
+			                            			</select>
+			                            		</td>
+			                            		<td>
+			                            			<select name="material[]" class="form-control">
+			                            				<option selected value="" >Select One..</option>
+			                            				<option value="rose white"  @if($area->material_chosen == 'rose white') selected @endif>Rose White</option>
+			                            				<option value="ulister"  @if($area->material_chosen == 'ulister') selected @endif>ULster</option>
+			                            			</select>
+			                            		</td>
+			                            		<td>
+			                            			<input type="text" name="exp_date[]" value="{{ $area->expected_material_delivery }}" class="form-control datepicker">
+			                            		</td>
+			                            		<td>
+			                            			<input type="text" name="sch_date[]"  value="{{ $area->scheduled_fit_date }}" class="form-control datepicker">
+			                            		</td>
+			                            		<td>
+			                            			<input type="text" name="room_price[]" value="{{ $area->room_price }}" class="form-control">
+			                            		</td>
+			                            		<td>
+			                            			<select name="going_ahead[]" class="form-control">
+			                            				<option selected value="" >Select One..</option>
+			                            				<option value="Yes" @if($area->going_ahead  == 'Yes') selected @endif>Yes</option>
+			                            				<option value="No" @if($area->going_ahead == 'No') selected @endif>No</option>
+			                            			</select>
+			                            		</td>
+			                            		<td>
+			                            			<select name="fit_complete[]" class="form-control">
+			                            				<option value='' selected >Select One..</option>
+			                            				<option value="Yes" @if($area->fit_complete  == 'Yes') selected @endif>Yes</option>
+			                            				<option value="No" @if($area->fit_complete  == 'No') selected @endif>No</option>
+			                            			</select>
+			                            		</td>
+			                            		<td class="remove-btn">
+                                                 <button type="button" class="btn remove-row btn-sm btn-danger float-right"><i class="fa fa-times"></i></button>
+                                                </td>
+			                            	</tr>
+                                            @endif
+  @endforeach
 			                            </tbody>
 			                            <tbody id="new-tbody">
 
@@ -357,6 +454,9 @@
 								</div>
 							</div>
 						</div>
+
+
+
 						<div class="tab-pane" id="survey">
 
 								<div class="row">
@@ -365,8 +465,8 @@
 											<label>Sub Floor type</label>
 											<select name="floor_type" class="form-control">
 												<option selected>Select One</option>
-												<option value="Concrete">Concrete</option>
-												<option value="Wood">Wood</option>
+												<option value="Concrete" @if($orders->sub_floor_type == 'Concrete') selected @endif>Concrete</option>
+												<option value="Wood" @if($orders->sub_floor_type == 'Wood') selected @endif>Wood</option>
 											</select>
 										</div>
 									</div>
@@ -375,8 +475,8 @@
 											<label>Build type</label>
 											<select name="build_type" class="form-control">
 												<option selected disabled>Select One</option>
-												<option value="New">New</option>
-												<option value="Old">Old</option>
+												<option value="New" @if($orders->build_type == 'new') selected @endif>New</option>
+												<option value="Old" @if($orders->build_type == 'old') selected @endif>Old</option>
 											</select>
 										</div>
 									</div>
@@ -385,15 +485,15 @@
 											<label>Moisture Reading Needed?</label>
 											<select name="moisture" class="form-control moisture">
 												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
+												<option value="Yes"  @if($orders->moisture_read_need == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->moisture_read_need == 'No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-6 moisture_per hidden">
 										<div class="form-group">
 											<label>Moisture reading %</label>
-											<input type="text" name="moisture_per" class="form-control" placeholder="Enter Moisture Reading %">
+											<input type="text" name="moisture_per" class="form-control" value="{{ $product->moisture_read_per }}" placeholder="Enter Moisture Reading %">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -401,8 +501,8 @@
 											<label>Underfloor heating?</label>
 											<select name="underfloor" class="form-control">
 												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
+							<option value="Yes"  @if($orders->underfloor_heating == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->underfloor_heating == 'No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
@@ -411,15 +511,15 @@
 											<label>Screed required?</label>
 											<select name="screed" class="form-control screed">
 												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
-											</select>
+                                                <option value="Yes"  @if($orders->speed_required == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->speed_required == 'No') selected @endif>No</option>
+																		</select>
 										</div>
 									</div>
 									<div class="col-md-6 screed_detail hidden">
 										<div class="form-group">
 											<label>Screed details</label>
-											<input type="text" name="screed_detail" class="form-control" placeholder="Enter Screed Detail">
+											<input type="text" name="screed_detail" value="{{ $orders->speed_detail }}" class="form-control" placeholder="Enter Screed Detail">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -427,8 +527,8 @@
 											<label>Door Saddles in place?</label>
 											<select name="saddles" class="form-control saddles">
 												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
+												 <option value="Yes"  @if($orders->door_saddles_place == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->door_saddles_place == 'No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
@@ -437,8 +537,8 @@
 											<label>Door Saddles need to uplifted</label>
 											<select name="saddles_uplifted" class="form-control saddles_uplifted">
 												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
+						 <option value="Yes"  @if($orders->door_saddles_need == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->door_saddles_need == 'No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
@@ -447,8 +547,8 @@
 											<label>Skirting in place ?</label>
 											<select name="skirting" class="form-control skirting">
 												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
+										<option value="Yes"  @if($orders->skirting_place == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->skirting_place == 'No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
@@ -457,8 +557,8 @@
 											<label>Action on skirting</label>
 											<select name="action_skit" class="form-control">
 												<option selected disabled>Select One</option>
-												<option value="Reuse">Reuse</option>
-												<option value="Replace">Replace</option>
+												<option value="Reuse"  @if($orders->action_skirting == 'Reuse') selected @endif>Reuse</option>
+												<option value="Replace"  @if($orders->action_skirting == 'Replace') selected @endif>Replace</option>
 											</select>
 										</div>
 									</div>
@@ -467,8 +567,9 @@
 											<label>Stairs?</label>
 											<select name="stairs" class="form-control stairs">
 												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
+												<option value="Yes"  @if($orders->stairs == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->stairs == 'No') selected @endif>No</option>
+
 											</select>
 										</div>
 									</div>
@@ -476,8 +577,8 @@
 										<div class="form-group">
 											<label>Runner</label>
 											<select name="runner" class="form-control runner">
-												<option value="Yes">Yes</option>
-												<option value="No" selected>No</option>
+												<option value="Yes"  @if($orders->runner == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->runner == 'No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
@@ -486,8 +587,8 @@
 											<label>Binding Type</label>
 											<select name="binding" class="form-control binding">
 												<option value="null" selected>Select One</option>
-												<option value="Cotton">Cotton</option>
-												<option value="Yarn">Yarn</option>
+												<option value="Cotton"  @if($orders->binding_type == 'Cotton') selected @endif>Cotton</option>
+												<option value="Yarn"  @if($orders->binding_type == 'Yarn') selected @endif>Yarn</option>
 											</select>
 										</div>
 									</div>
@@ -495,89 +596,150 @@
 										<div class="form-group">
 											<label>Rods</label>
 											<select name="rodes" class="form-control rods">
-												<option value="Yes">Yes</option>
-												<option value="No" selected>No</option>
+															<option value="Yes"  @if($orders->rod == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->rod == 'No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-6 rods_yes hidden">
 										<div class="form-group">
 											<label>Rods type</label>
-											<input type="text" name="rods_type" class="form-control rods_type" placeholder="Enter Rods Type">
+											<input type="text" name="rods_type" class="form-control rods_type" value="{{ $orders->rod_type }}" placeholder="Enter Rods Type">
 										</div>
 									</div>
 									<div class="col-md-6 rods_yes hidden">
 										<div class="form-group">
 											<label>Rods size</label>
-											<input type="text" name="rods_size" class="form-control rods_size" placeholder="Enter Rods Size">
+											<input type="text" name="rods_size" class="form-control rods_size" value="{{ $orders->rod_size }}" placeholder="Enter Rods Size">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Uplift + Dispose old material</label>
 											<select name="rods" class="form-control rods">
-												<option value="No" selected>Yes</option>
-												<option value="Yes"></option>
+																<option value="Yes"  @if($orders->up_lift == 'Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->up_lift == 'No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
 								</div>
+
+
+
 								<div class="row underlay-row" id="underlay-1">
+
 									<div class="col-md-12">
 										<div class="remove-btn-under text-right"></div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Underlay <font class="new-count">1</font></label>
-											<input type="text" name="underlay[]" class="form-control" placeholder="Enter Underlay..">
+											<input type="text" name="underlay[]" value="{{ $orders->underlay[0]["underlay"] }}" class="form-control" placeholder="Enter Underlay..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Area</label>
-											<input type="text" name="area[]" class="form-control" placeholder="Enter Area..">
+											<input type="text" name="area[]"  value="{{ $orders->underlay[0]["area"] }}" class="form-control" placeholder="Enter Area..">
 										</div>
 									</div>
 								</div>
-								<div id="new-underlay">
 
+								<div id="new-underlay">
+                                    @foreach($orders->underlay as $under)
+                                    @if($loop->iteration!=1)
+                                    <div class="row new-row" id="underlay-{{ $loop->iteration }}">
+
+                                        <div class="col-md-12">
+                                            <div class="remove-btn-under text-right">
+                                                <button type="button" class="remove-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Underlay <font class="new-count">{{ $loop->iteration}}</font></label>
+                                                <input type="text" name="underlay[]" value="{{ $under->underlay }}" class="form-control" placeholder="Enter Underlay..">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Area</label>
+                                                <input type="text" name="area[]"  value="{{ $under->area }}" class="form-control" placeholder="Enter Area..">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @endforeach
 								</div>
+
 
 								<div class="row">
 									<div class="col-md-12 text-right">
-										<button type="button" class="btn btn-primary btn-sm add-underlay">+ Add Underlay Type</button>
+										<button type="button" class="btn btn-primary btn-sm add-underlay {{ count($orders->underlay)>2 ? "hidden":"" }}">+ Add Underlay Type</button>
 									</div>
 								</div>
 
+
+
 								<div class="row trim-row" id="trim-1">
+
 									<div class="col-md-12">
 										<div class="remove-btn-trim text-right"></div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Trim <font class="new-count-2">1</font></label>
-											<input type="text" name="trim[]" class="form-control" placeholder="Enter Trim..">
+											<input type="text" name="trim[]" value="{{ $orders->trim[0]["trim"] }}" class="form-control" placeholder="Enter Trim..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Area</label>
-											<input type="text" name="trim_area[]" class="form-control" placeholder="Enter Area..">
+											<input type="text" name="trim_area[]"  value="{{ $orders->trim[0]["trim_area"] }}" class="form-control" placeholder="Enter Area..">
 										</div>
 									</div>
-								</div>
-								<div id="new-trim">
 
+
+								</div>
+
+								<div id="new-trim">
+                                       @foreach($orders->trim as $trim)
+                                    @if($loop->iteration!=1)
+                                 <div class="row new-trim" id="trim-{{ $loop->iteration }}">
+
+									<div class="col-md-12">
+										<div class="remove-btn-trim text-right">
+                                        <button type="button" class="remove-row  trim-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                        </div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Trim <font class="new-count-2">{{ $loop->iteration }}</font></label>
+											<input type="text" name="trim[]" value="{{ $trim->trim}}" class="form-control" placeholder="Enter Trim..">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Area</label>
+											<input type="text" name="trim_area[]"  value="{{ $trim->trim_area }}" class="form-control" placeholder="Enter Area..">
+										</div>
+									</div>
+
+
+								</div>
+                                        @endif
+                                    @endforeach
 								</div>
 
 								<div class="row">
 									<div class="col-md-12 text-right">
-										<button type="button" class="btn btn-primary btn-sm add-trim">+ Add Trim Detail</button>
+										<button type="button" class="btn btn-primary btn-sm add-trim {{ count($orders->trim)>2 ? "hidden":"" }}" >+ Add Trim Detail</button>
 									</div>
 								</div>
 
 						</div>
-						<div class="tab-pane" id="intial_enquiry">
+
+					<div class="tab-pane" id="intial_enquiry">
 
 								<div class="row">
 									<div class="col-md-6">
@@ -585,54 +747,54 @@
 											<label>To measure unscheduled</label>
 											<select name="unscheduled" class="form-control unscheduled">
 												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
+												<option value="Yes" @if($orders->to_measure_unscheduled=='Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->to_measure_unscheduled=='No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-6 unscheduled_yes hidden">
 										<label>Estimate date</label>
-										<input type="text" name="un_estimate_date" class="form-control datepicker">
+										<input type="text" name="un_estimate_date" value="{{ $orders->estimate_date }}"  class="form-control datepicker">
 									</div>
 									<div class="col-md-6">
 										<label>To Measure scheduled</label>
-										<input type="text" name="sc_estimate_date" class="form-control datepicker">
+										<input type="text" name="sc_estimate_date"  value="{{ $orders->to_measure_scheduled }}" class="form-control datepicker">
 									</div>
 									<div class="col-md-6">
 										<label>Price given to customer (Quoted)</label>
-										<input type="text" name="price" class="form-control" placeholder="Enter price, detail etc..">
+										<input type="text" name="price" class="form-control"   value="{{ $orders->to_price_quoted }}" placeholder="Enter price, detail etc..">
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Job Agreed</label>
 											<select name="job" class="form-control job">
-												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
+												<option selected value="">Select One</option>
+												<option value="Yes" @if($orders->job_agreed=='Yes') selected @endif>Yes</option>
+												<option value="No" @if($orders->job_agreed=='Yes') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-6 job_yes hidden">
 										<label>Calendar for install date</label>
-										<input type="text" name="Install_date" class="form-control datepicker">
+										<input type="text" name="Install_date" value="{{ $orders->calendar_for_install_date }}" class="form-control datepicker">
 									</div>
 									<div class="col-md-6 job_no hidden">
 										<label>Comment</label>
-										<input type="text" name="comment" class="form-control">
+										<input type="text" name="comment" class="form-control" value="{{ $orders->comment }}">
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Job Schedule</label>
 											<select name="job_schedule" class="form-control job_schedule">
 												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
+												<option value="Yes" @if($orders->job_schedule=='Yes') selected @endif>Yes</option>
+												<option value="No"  @if($orders->job_schedule=='No') selected @endif>No</option>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-12 job_schedule_no hidden">
 										<label>Full Job Comment</label>
-										<textarea rows="3" name="full_comment" class="form-control" placeholder="Enter Full Job Comment ..."></textarea>
+										<textarea rows="3" name="full_comment"  value="{{ $orders->full_comment }}"class="form-control" placeholder="Enter Full Job Comment ..."></textarea>
 									</div>
 								</div>
 
@@ -643,49 +805,49 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Total Value</label>
-											<input type="number" name="total" class="form-control total" placeholder="Enter Total Value..">
+											<input type="number" name="total"  value="{{ $orders->total_value }}" class="form-control total" placeholder="Enter Total Value..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Payment Comment</label>
-											<input type="text" name="total_comment" class="form-control" placeholder="Enter Comment Here..">
+											<input type="text" name="total_comment" value="{{ $orders->payment_comment_val }}" class="form-control" placeholder="Enter Comment Here..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Initial Deposit</label>
-											<input type="number" name="intial_dep" class="form-control deposit" placeholder="Enter Intial Deposit..">
+											<input type="number" name="intial_dep" class="form-control deposit" value="{{ $orders->intial_deposit  }}" placeholder="Enter Intial Deposit..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Payment Comment</label>
-											<input type="text" name="int_comment" class="form-control" placeholder="Enter Comment Here..">
+											<input type="text" name="int_comment" class="form-control" value="{{ $orders->payment_comment_intial  }}" placeholder="Enter Comment Here..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Additonal Payments</label>
-											<input type="number" name="additional_payment" class="form-control additonal" placeholder="Enter Additonal Payment..">
+											<input type="number" name="additional_payment" value="{{ $orders->additional_payment  }}" class="form-control additonal" placeholder="Enter Additonal Payment..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Payment Comment</label>
-											<input type="text" name="add_comment" class="form-control" placeholder="Enter Comment Here..">
+											<input type="text" name="add_comment" class="form-control" value="{{ $orders->payment_comment_additional	  }}" placeholder="Enter Comment Here..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Balance Due</label>
-											<input type="number" name="add_comment" class="form-control balance" readonly>
+											<input type="number" name="add_comment" class="form-control balance" value="{{ $orders->balance_due }}" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Status</label>
-											<input type="text" name="status" class="form-control status" readonly>
+											<input type="text" name="status" class="form-control status" value="{{ $orders->status }}" readonly>
 										</div>
 									</div>
 								</div>
@@ -706,7 +868,7 @@
 @endsection
 @section('js')
 <script>
-	var product= 1;
+	var product= $('.prod-count').length;
 	var prod_count= 1;
 	$(document).on('click','.add-product',function(){
 		var prod_count = $('.prod-count').length;
@@ -715,10 +877,11 @@
 			var content = $('#product-1').html();
 			$('#new-product').append('<div class="row product-row" id="product-'+(product+1)+'">'+content+'</div>');
 	            $('#product-'+(product+1)).find('input').val("");
-	            // md.initFormExtendedDatetimepickers();
+	            md.initFormExtendedDatetimepickers();
 	            $('#product-'+(product+1)).find('.prod-count').text(prod_count+1);
-	            $('#product-'+(product+1)).find('.remove-btn-prod').append('<button type="button" class="remove-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>');
-		}
+	           $('#product-'+(product+1)).find('.remove-btn-prod').append('<button type="button" class="remove-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>');
+
+            }
 		prod_count++;
 		product++;
 		if(prod_count == 10)
@@ -738,11 +901,9 @@
         prod_count--;
     });
 
-	var row= 1;
+	var row= $('.count').length;;
 	var count= 1;
 	$(document).on('click','.add-area',function(){
-
-		// md.initFormExtendedDatetimepickers();
 
 		var count = $('.count').length;
 		if(count<10)
@@ -753,6 +914,20 @@
 	            // md.initFormExtendedDatetimepickers();
 	            $('#t-row-'+(row+1)).find('.count').text(count+1);
 	            $('#t-row-'+(row+1)).find('.remove-btn').append('<button type="button" class="remove-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>');
+	            $('.datepicker').datetimepicker({
+				      format: 'MM/DD/YYYY',
+				      icons: {
+				        time: "fa fa-clock-o",
+				        date: "fa fa-calendar",
+				        up: "fa fa-chevron-up",
+				        down: "fa fa-chevron-down",
+				        previous: 'fa fa-chevron-left',
+				        next: 'fa fa-chevron-right',
+				        today: 'fa fa-screenshot',
+				        clear: 'fa fa-trash',
+				        close: 'fa fa-remove'
+				      }
+				    });
 		}
 		count++;
 		row++;
@@ -761,6 +936,7 @@
 	});
 
 	$(document).on('click', '.remove-row', function(){
+        {{--  alert("test")  --}}
 		var count = $('.count').length;
         $(this).closest('.new-row').remove();
         var align = 1;
@@ -884,7 +1060,7 @@
 			var content = $('#underlay-1').html();
 			$('#new-underlay').append('<div class="row new-underlay" id="underlay-'+(under+1)+'">'+content+'</div>');
 	            $('#underlay-'+(under+1)).find('input').val("");
-	            // md.initFormExtendedDatetimepickers();
+	            md.initFormExtendedDatetimepickers();
 	            $('#underlay-'+(under+1)).find('.new-count').text(new_count+1);
 	            $('#underlay-'+(under+1)).find('.remove-btn-under').append('<button type="button" class="remove-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>');
 		}
