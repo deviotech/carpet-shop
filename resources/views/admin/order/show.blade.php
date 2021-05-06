@@ -18,10 +18,10 @@
                             <thead class="text-primary">
                                 <tr>
                                     <th>Inquery Date</th>
-                                       <th>Inquery number</th>
+                                    <th>Inquery number</th>
                                     <th>Tower Contract </th>
                                     <th>Aircode 1</th>
-                                   <th>Aircode 2</th>
+                                    <th>Aircode 2</th>
                                     <th>Customer Name 1 </th>
                                     <th>Customer Name 2 </th>
                                     <th>Customer Email 1 </th>
@@ -29,15 +29,13 @@
                                     <th>Action</th>
 
 
-                                    {{--  <th>Customer Email 2 </th>
+                              {{--  <th>Customer Email 2 </th>
                                     <th>Customer Mobile 1 </th>
                                     <th>Customer Mobile 2 </th>
-
                                     <th>Address 1 </th>
                                     <th>Address 2 </th>
                                     <th>Address 3 </th>
                                     <th>Address 4 </th>  --}}
-
 
                                 </tr>
                             </thead>

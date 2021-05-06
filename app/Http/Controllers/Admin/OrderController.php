@@ -183,7 +183,7 @@ $orders->update([
             'aircode_2'=>$request->eircode2,
             'area_type'=>$request->area_type,
             'sub_floor_type'=>$request->floor_type,
-            'build_type'=>$request->binding,
+            'build_type'=>$request->build_type,
             'moisture_read_need'=>$request->moisture,
             'moisture_read_per'=>$request->moisture_per,
             'underfloor_heating'=>$request->underfloor,

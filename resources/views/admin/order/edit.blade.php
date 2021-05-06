@@ -126,13 +126,13 @@
 											<label>Tower Contract</label>
 											<select name="staff" class="form-control select2">
 												<option selected disabled>Select One..</option>
-												@foreach(stafff() as $item)
-                @if($orders->tower_contract == $item->id)
-                  <option selected="" value="{{ $item->id }}">{{ $item->name }}</option>
-                @else
-                  <option value="{{ $item->id }}">{{ $item->name }}</option>
-                @endif
-												@endforeach
+											@foreach(stafff() as $item)
+                                                @if($orders->tower_contract == $item->id)
+                                                <option selected="" value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @else
+                                               <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endif
+											@endforeach
 											</select>
 										</div>
                                                @error('tower_contract')
@@ -230,8 +230,7 @@
 										<div class="form-group">
 											<label>Area Type</label>
 											<select name="area_type" class="form-control select2">
-
-												<option    value="residential"   @if($orders->area_type == 'residential') selected @endif> Residential</option>
+												<option value="residential" @if($orders->area_type == 'residential') selected @endif> Residential</option>
 												<option value="commercial"  @if($orders->area_type == 'commercial') selected @endif> Commercial</option>
 											</select>
 										</div>
@@ -251,51 +250,30 @@
 
 								<div class="col-md-12">
 									<div class="form-group">
-
-
-
 										<label>Product <font class="prod-count">1</font></label>
-
 										<input type="text" name="product[]" value="{{ $orders->products[0]["product"] ?? '' }}" class="form-control" placeholder="Enter Product..">
-
-
                                     </div>
 								</div>
-
-
 							</div>
-{{--  @endforeach  --}}
+
 							<div id="new-product">
-  @foreach($orders->products as $product)
-
-  @if($loop->iteration!=1)
-
-
+                        @foreach($orders->products as $product)
+                             @if($loop->iteration!=1)
 							<div class="row product-row " id="product-{{ $loop->iteration }}">
 								<div class="col-md-12">
 									<div class="remove-btn-prod delete text-right">
-						 <button type="button" class="btn remove-row btn-sm btn-danger float-right"><i class="fa fa-times"></i></button>
-
+						             <button type="button" class="btn remove-row btn-sm btn-danger float-right"><i class="fa fa-times"></i></button>
 									</div>
-
 								</div>
-
 								<div class="col-md-12">
 									<div class="form-group">
-
-
-
 										<label>Product <font class="prod-count"> {{ $loop->iteration }}</font></label>
-
 										<input type="text" name="product[]" value="{{ $product->product }}" class="form-control" placeholder="Enter Product..">
-
                                     </div>
 								</div>
-
-
 							</div>
                             @endif
-@endforeach
+                        @endforeach
 							</div>
 
 
@@ -307,7 +285,7 @@
 
                         </div>
 
-<div class="tab-pane" id="area">
+                            <div class="tab-pane" id="area">
 							<div class="row">
 								<div class="table-responsive">
 			                        <table id="area-table" class="table table-bordered">
@@ -381,11 +359,9 @@
 			                            		<td class="remove-btn"></td>
 			                            	</tr>
 
-                                            @foreach($orders->AreaDetail as $area)
-
-
-@if($loop->iteration!=1)
-	<tr class="new-row" id="t-row-{{ $loop->iteration }}">
+                                     @foreach($orders->AreaDetail as $area)
+                                          @if($loop->iteration!=1)
+	                                       <tr class="new-row" id="t-row-{{ $loop->iteration }}">
 
 			                            		<td> <font class="count">{{ $loop->iteration }}</font>
 			                            		<td>
@@ -440,7 +416,7 @@
                                                 </td>
 			                            	</tr>
                                             @endif
-  @endforeach
+                                         @endforeach
 			                            </tbody>
 			                            <tbody id="new-tbody">
 
@@ -475,8 +451,8 @@
 											<label>Build type</label>
 											<select name="build_type" class="form-control">
 												<option selected disabled>Select One</option>
-												<option value="New" @if($orders->build_type == 'new') selected @endif>New</option>
-												<option value="Old" @if($orders->build_type == 'old') selected @endif>Old</option>
+												<option value="New" @if($orders->build_type == 'New') selected @endif>New</option>
+												<option value="Old" @if($orders->build_type == 'Old') selected @endif>Old</option>
 											</select>
 										</div>
 									</div>
@@ -501,7 +477,7 @@
 											<label>Underfloor heating?</label>
 											<select name="underfloor" class="form-control">
 												<option selected disabled>Select One</option>
-							<option value="Yes"  @if($orders->underfloor_heating == 'Yes') selected @endif>Yes</option>
+							                    <option value="Yes"  @if($orders->underfloor_heating == 'Yes') selected @endif>Yes</option>
 												<option value="No"  @if($orders->underfloor_heating == 'No') selected @endif>No</option>
 											</select>
 										</div>
@@ -537,7 +513,7 @@
 											<label>Door Saddles need to uplifted</label>
 											<select name="saddles_uplifted" class="form-control saddles_uplifted">
 												<option selected disabled>Select One</option>
-						 <option value="Yes"  @if($orders->door_saddles_need == 'Yes') selected @endif>Yes</option>
+						                        <option value="Yes"  @if($orders->door_saddles_need == 'Yes') selected @endif>Yes</option>
 												<option value="No"  @if($orders->door_saddles_need == 'No') selected @endif>No</option>
 											</select>
 										</div>
@@ -646,7 +622,7 @@
 								</div>
 
 								<div id="new-underlay">
-                                    @foreach($orders->underlay as $under)
+                                 @foreach($orders->underlay as $under)
                                     @if($loop->iteration!=1)
                                     <div class="row new-row" id="underlay-{{ $loop->iteration }}">
 
@@ -669,7 +645,7 @@
                                         </div>
                                     </div>
                                     @endif
-                                    @endforeach
+                                 @endforeach
 								</div>
 
 
@@ -703,7 +679,7 @@
 								</div>
 
 								<div id="new-trim">
-                                       @foreach($orders->trim as $trim)
+                                @foreach($orders->trim as $trim)
                                     @if($loop->iteration!=1)
                                  <div class="row new-trim" id="trim-{{ $loop->iteration }}">
 
@@ -727,8 +703,8 @@
 
 
 								</div>
-                                        @endif
-                                    @endforeach
+                                    @endif
+                                @endforeach
 								</div>
 
 								<div class="row">

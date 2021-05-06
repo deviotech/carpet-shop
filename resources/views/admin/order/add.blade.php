@@ -692,7 +692,7 @@
 
 						</div>
 					</div>
-                    								<div class="row">
+                    			<div class="row">
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-success">Save</button>
 										<a href="" class="btn btn-danger">Close</a>
