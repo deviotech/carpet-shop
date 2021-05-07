@@ -27,6 +27,7 @@ require __DIR__.'/auth.php';
             Route::get('show', 'OrderController@showOrder')->name('show.order');
             Route::get('edit/{id?}', 'OrderController@edit')->name('edit.order');
             Route::post('edit/post/{id?}', 'OrderController@update')->name('edit.post.order');
+            Route::get('delete/order/{id?}', 'OrderController@orderListDelete')->name('delete.order.list');
 
 
 		});

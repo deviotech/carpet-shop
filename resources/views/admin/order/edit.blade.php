@@ -44,6 +44,80 @@
 </style>
 @endsection
 @section('content')
+<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header card-header-tabs card-header-primary">
+					<div class="nav-tabs-navigation">
+						<div class="nav-tabs-wrapper" style="font-size:30px;">
+							Information
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+  <form method="POST" action="{{ route('admin.order.edit.post.order', $orders->id) }}" >
+                        <input type="hidden" name="order_id" class="form-control datepicker" value="{{ $orders->id }}">
+
+                        @csrf
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Date of Enquiry</label>
+											<input type="text" name="enquiry_date"  value="{{ $orders->enquiry_date }}" class="form-control datepicker">
+										</div>
+
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Enquiry Number</label>
+											<input type="text" name="enquiry_num" readonly value="{{  $orders->enquiry_number }}" class="form-control">
+										</div>
+
+
+									</div>
+
+										<div class="col-md-4">
+										<div class="form-group">
+											<label>Tower Contract</label>
+											<select name="staff" class="form-control select2">
+												<option selected disabled>Select One..</option>
+											@foreach(stafff() as $item)
+                                                @if($orders->tower_contract == $item->id)
+                                                <option selected="" value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @else
+                                               <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                @endif
+											@endforeach
+											</select>
+										</div>
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Customer Contact Name 1</label>
+											<input type="text" name="cust_cont_name_1"   value="{{  $orders->cust_cont_name_1 }}" class="form-control">
+										</div>
+
+									</div>
+
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Customer Contact Mobile 1</label>
+											<input type="text" name="cust_cont_mobile_1"  value="{{  $orders->cust_cont_mobile_1 }}" class="form-control">
+										</div>
+									</div>
+								</div>
+						    </div>
+                         </div>
+                      </div>
+                  </div>
+
+
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
@@ -92,81 +166,17 @@
 					</div>
 				</div>
 				<div class="card-body">
-                    <form method="POST" action="{{ route('admin.order.edit.post.order', $orders->id) }}" >
-                        <input type="hidden" name="order_id" class="form-control datepicker" value="{{ $orders->id }}">
 
-                        @csrf
 					<div class="tab-content">
                     	<div class="tab-pane active" id="information">
-
 								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Date of Enquiry</label>
-											<input type="text" name="enquiry_date" class="form-control datepicker" value="{{ $orders->enquiry_date }}">
-
-										</div>
-                                              @error('enquiry_date')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Enquiry Number</label>
-											<input type="text" name="enquiry_num" class="form-control" value="{{ $orders->enquiry_number }}" >
-										</div>
-										                                               @error('enquiry_number')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-
-									</div>
-{{--  {{$pro_cat->category_id == $item->id ? 'selected' : ""}}  --}}
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Tower Contract</label>
-											<select name="staff" class="form-control select2">
-												<option selected disabled>Select One..</option>
-											@foreach(stafff() as $item)
-                                                @if($orders->tower_contract == $item->id)
-                                                <option selected="" value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @else
-                                               <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endif
-											@endforeach
-											</select>
-										</div>
-                                               @error('tower_contract')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-									</div>
-
-								</div>
-
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Customer Contact Name 1</label>
-											<input type="text" value="{{ $orders->cust_cont_name_1 }}" name="cust_name_1" class="form-control">
-										</div>
-                                        	                                               @error('cust_cont_name_1')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Customer Contact Mobile 1</label>
-											<input type="text" name="cust_mobile_1" value="{{ $orders->cust_cont_mobile_1 }}" class="form-control">
-										</div>
-									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Email 1</label>
 											<input type="text" name="cust_email_1" value="{{ $orders->cust_cont_email_1 }}" class="form-control">
 										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
+                                    </div>
+                                        <div class="col-md-4">
 										<div class="form-group">
 											<label>Address 1</label>
 											<input type="text" name="address_1" value="{{ $orders->cust_cont_address_1 }}" class="form-control">
@@ -178,15 +188,17 @@
 											<input type="text" name="address_2" value="{{ $orders->cust_cont_address_2 }}" class="form-control">
 										</div>
 									</div>
+
+								</div>
+								<div class="row">
+
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Eircode</label>
 											<input type="text" name="eircode"  value="{{ $orders->aircode_1 }}"class="form-control">
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
+                                    <div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Name 2</label>
 											<input type="text" name="cust_name_2" value="{{ $orders->cust_cont_name_2 }}" class="form-control">
@@ -198,15 +210,18 @@
 											<input type="text" name="cust_mobile_2" value="{{ $orders->cust_cont_mobile_2 }}" class="form-control">
 										</div>
 									</div>
+								</div>
+
+
+								<div class="row">
+
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Email 2</label>
 											<input type="text" name="cust_email_2" value="{{ $orders->cust_cont_email_2 }}" class="form-control">
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
+                                    <div class="col-md-4">
 										<div class="form-group">
 											<label>Address 1</label>
 											<input type="text" name="sec_address_1" value="{{ $orders->cust_cont_address_3 }}"class="form-control">
@@ -218,15 +233,16 @@
 											<input type="text" name="sec_address_2" value="{{ $orders->cust_cont_address_4 }}" class="form-control">
 										</div>
 									</div>
+								</div>
+								<div class="row">
+
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Eircode</label>
 											<input type="text" name="eircode2" value="{{ $orders->aircode_2 }}" class="form-control">
 										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
+                                    <div class="col-md-4">
 										<div class="form-group">
 											<label>Area Type</label>
 											<select name="area_type" class="form-control select2">
@@ -236,9 +252,7 @@
 										</div>
 									</div>
 								</div>
-
-
-						</div>
+						    </div>
 
 
 						<div class="tab-pane" id="material">
@@ -320,40 +334,40 @@
 			                            		</td>
 			                            		<td>
 			                            			<select name="type[]" class="form-control">
-			                            				<option  selected value="" >Select One..</option>
-			                            				<option value="wood" @if($orders->AreaDetail[0]['type']  == 'wood') selected @endif>Wood</option>
-			                            				<option value="lvt"  @if($orders->AreaDetail[0]['type'] == 'lvt') selected @endif>LVT</option>
-			                            				<option value="carpet"  @if($orders->AreaDetail[0]['type'] == 'carpet') selected @endif >Carpet</option>
+			                            				  <option  selected value="" >Select One..</option>
+			                            				<option value="wood" @if($orders->AreaDetail[0]['type'] ?? ''  == 'wood') selected @endif>Wood</option>
+			                            				<option value="lvt"  @if($orders->AreaDetail[0]['type']   ?? '' == 'lvt') selected @endif>LVT</option>
+			                            				<option value="carpet"  @if($orders->AreaDetail[0]['type']    ?? ' ' == 'carpet' ) selected @endif >Carpet</option>
 			                            			</select>
 			                            		</td>
 			                            		<td>
 			                            			<select name="material[]" class="form-control">
 			                            				<option selected value="" >Select One..</option>
-			                            				<option value="rose white"  @if($orders->AreaDetail[0]['material_chosen'] == 'rose white') selected @endif>Rose White</option>
-			                            				<option value="ulister"  @if($orders->AreaDetail[0]['material_chosen'] == 'ulister') selected @endif>ULster</option>
+			                            				<option value="rose white"  @if($orders->AreaDetail[0]['material_chosen'] ?? '' == 'rose white') selected @endif>Rose White</option>
+			                            				<option value="ulister"  @if($orders->AreaDetail[0]['material_chosen'] ?? '' == 'ulister') selected @endif>ULster</option>
 			                            			</select>
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="exp_date[]" value="{{ $orders->AreaDetail[0]['expected_material_delivery'] }}" class="form-control datepicker">
+			                            			<input type="text" name="exp_date[]" value="{{ $orders->AreaDetail[0]['expected_material_delivery'] ?? ''}}" class="form-control datepicker">
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="sch_date[]"  value="{{ $orders->AreaDetail[0]['scheduled_fit_date'] }}" class="form-control datepicker">
+			                            			<input type="text" name="sch_date[]"  value="{{ $orders->AreaDetail[0]['scheduled_fit_date'] ?? ''}}" class="form-control datepicker">
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="room_price[]" value="{{ $orders->AreaDetail[0]['room_price'] }}" class="form-control">
+			                            			<input type="text" name="room_price[]" value="{{ $orders->AreaDetail[0]['room_price'] ?? ''}}" class="form-control">
 			                            		</td>
 			                            		<td>
 			                            			<select name="going_ahead[]" class="form-control">
 			                            				<option selected value="" >Select One..</option>
-			                            				<option value="Yes" @if($orders->AreaDetail[0]['going_ahead']  == 'Yes') selected @endif>Yes</option>
-			                            				<option value="No" @if($orders->AreaDetail[0]['going_ahead']  == 'No') selected @endif>No</option>
+			                            				<option value="Yes" @if($orders->AreaDetail[0]['going_ahead'] ?? ''  == 'Yes') selected @endif>Yes</option>
+			                            				<option value="No" @if($orders->AreaDetail[0]['going_ahead'] ?? '' == 'No') selected @endif>No</option>
 			                            			</select>
 			                            		</td>
 			                            		<td>
 			                            			<select name="fit_complete[]" class="form-control">
 			                            				<option value='' selected >Select One..</option>
-			                            				<option value="Yes" @if($orders->AreaDetail[0]['fit_complete']  == 'Yes') selected @endif>Yes</option>
-			                            				<option value="No" @if($orders->AreaDetail[0]['fit_complete']  == 'No') selected @endif>No</option>
+			                            				{{--  <option value="Yes" @if($orders->AreaDetail[0]['fit_complete']  == 'Yes') selected @endif>Yes</option>
+			                            				<option value="No" @if($orders->AreaDetail[0]['fit_complete']  == 'No') selected @endif>No</option>  --}}
 			                            			</select>
 			                            		</td>
 			                            		<td class="remove-btn"></td>
@@ -389,13 +403,13 @@
 			                            			</select>
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="exp_date[]" value="{{ $area->expected_material_delivery }}" class="form-control datepicker">
+			                            			<input type="text" name="exp_date[]" value="{{ $area->expected_material_delivery ?? ''}}" class="form-control datepicker">
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="sch_date[]"  value="{{ $area->scheduled_fit_date }}" class="form-control datepicker">
+			                            			<input type="text" name="sch_date[]"  value="{{ $area->scheduled_fit_date ?? '' }}" class="form-control datepicker">
 			                            		</td>
 			                            		<td>
-			                            			<input type="text" name="room_price[]" value="{{ $area->room_price }}" class="form-control">
+			                            			<input type="text" name="room_price[]" value="{{ $area->room_price  ?? '' }}" class="form-control">
 			                            		</td>
 			                            		<td>
 			                            			<select name="going_ahead[]" class="form-control">

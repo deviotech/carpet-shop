@@ -44,6 +44,85 @@
 </style>
 @endsection
 @section('content')
+<div class="row">
+      <form method="POST" action="{{ route('admin.order.create') }}" >
+        @csrf
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header card-header-tabs card-header-primary">
+					<div class="nav-tabs-navigation">
+						<div class="nav-tabs-wrapper" style="font-size:30px;">
+							Information
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Date of Enquiry</label>
+											<input type="text" name="enquiry_date" value="{{ old('enquiry_date') }}" class="form-control datepicker">
+										</div>
+                                              @error('enquiry_date')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+									</div>
+
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Enquiry Number</label>
+											<input type="text" name="enquiry_number" readonly value="{{ old('enquiry_number') }}" class="form-control">
+										</div>
+                                            @error('enquiry_number')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+									</div>
+
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Tower Contract</label>
+											<select name="tower_contract" class="form-control select2" >
+												<option selected disabled>Select One..</option>
+												@foreach($list as $item)
+												<option value="{{$item->id}}" >{{$item->name}}</option>
+												@endforeach
+											</select>
+										</div>
+                                               @error('tower_contract')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Customer Contact Name 1</label>
+											<input type="text" name="cust_cont_name_1" value="{{ old('cust_cont_name_1') }}" class="form-control">
+										</div>
+                     @error('cust_cont_name_1')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<label>Customer Contact Mobile 1</label>
+											<input type="text" name="cust_cont_mobile_1"  value="{{ old('cust_cont_mobile_1') }}" class="form-control">
+										</div>
+                                         @error('cust_cont_mobile_1')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+									</div>
+
+								</div>
+						</div>
+                     </div>
+                  </div>
+              </div>
+
+
+
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
@@ -92,84 +171,26 @@
 					</div>
 				</div>
 				<div class="card-body">
-                    <form method="POST" action="{{ route('admin.order.create') }}" >
-                        @csrf
+
 					<div class="tab-content">
                     	<div class="tab-pane active" id="information">
 
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Date of Enquiry</label>
-											<input type="text" name="enquiry_date" class="form-control datepicker">
-
-										</div>
-                                              @error('enquiry_date')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Enquiry Number</label>
-											<input type="text" name="enquiry_number" class="form-control">
-										</div>
-										                                               @error('enquiry_number')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-
-									</div>
-
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Tower Contract</label>
-											<select name="tower_contract" class="form-control select2">
-												<option selected disabled>Select One..</option>
-												@foreach($list as $item)
-												<option value="{{$item->id}}">{{$item->name}}</option>
-												@endforeach
-											</select>
-										</div>
-                                               @error('tower_contract')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-									</div>
-
-								</div>
 
 								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Customer Contact Name 1</label>
-											<input type="text" name="cust_cont_name_1" class="form-control">
-										</div>
-                                        	                                               @error('cust_cont_name_1')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Customer Contact Mobile 1</label>
-											<input type="text" name="cust_cont_mobile_1" class="form-control">
-										</div>
-                                         @error('cust_cont_mobile_1')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-									</div>
+
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Email 1</label>
-											<input type="text" name="cust_cont_email_1" class="form-control">
+											<input type="text" name="cust_cont_email_1" class="form-control" value="{{ old('cust_cont_email_1') }}">
 										</div>
                                             @error('cust_cont_email_1')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
+                                    <div class="col-md-4">
 										<div class="form-group">
 											<label>Address 1</label>
-											<input type="text" name="cust_cont_address_1" class="form-control">
+											<input type="text" name="cust_cont_address_1" value="{{ old('cust_cont_address_1') }}" class="form-control">
 										</div>
                                                @error('cust_cont_address_1')
                             <div class="alert alert-danger">{{ $message }}</div>
@@ -178,57 +199,62 @@
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Address 2</label>
-											<input type="text" name="address_2" class="form-control">
+											<input type="text" name="cust_cont_address_2" value="{{ old('cust_cont_address_2') }}" class="form-control">
 										</div>
 
 									</div>
-									<div class="col-md-4">
+
+								</div>
+								<div class="row">
+													<div class="col-md-4">
 										<div class="form-group">
 											<label>Eircode</label>
-											<input type="text" name="aircode_1" class="form-control">
+											<input type="text" name="aircode_1" value="{{ old('aircode_1') }}"  class="form-control">
 										</div>
                                                   @error('aircode_1')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
 									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-4">
+                                    <div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Name 2</label>
-											<input type="text" name="cust_name_2" class="form-control">
+											<input type="text" name="cust_name_2"  value="{{ old('cust_name_2') }}" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Customer Contact Mobile 2</label>
-											<input type="text" name="cust_mobile_2" class="form-control">
+											<input type="text" name="cust_mobile_2"  value="{{ old('cust_mobile_2') }}" class="form-control">
 										</div>
 									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Customer Contact Email 2</label>
-											<input type="text" name="cust_email_2" class="form-control">
-										</div>
-									</div>
+
 								</div>
 								<div class="row">
 									<div class="col-md-4">
 										<div class="form-group">
+											<label>Customer Contact Email 2</label>
+											<input type="text" name="cust_email_2" value="{{ old('cust_email_2') }}" class="form-control">
+										</div>
+									</div>
+                                    <div class="col-md-4">
+										<div class="form-group">
 											<label>Address 1</label>
-											<input type="text" name="sec_address_1" class="form-control">
+											<input type="text" name="sec_address_1"  value="{{ old('sec_address_1') }}" class="form-control">
 										</div>
 									</div>
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Address 2</label>
-											<input type="text" name="sec_address_2" class="form-control">
+											<input type="text" name="sec_address_2" value="{{ old('sec_address_2') }}"  class="form-control">
 										</div>
 									</div>
+								</div>
+								<div class="row">
+
 									<div class="col-md-4">
 										<div class="form-group">
 											<label>Eircode</label>
-											<input type="text" name="aircode_2" class="form-control">
+											<input type="text" name="aircode_2"  value="{{ old('aircode_2') }}" class="form-control">
                                                          @error('aircode_2')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -698,14 +724,22 @@
 										<a href="" class="btn btn-danger">Close</a>
 									</div>
 								</div>
-                    </form>
+
 				</div>
 			</div>
 		</div>
+        </form>
 	</div>
 @endsection
 @section('js')
 <script>
+    function addZero(val){
+    return val < 10 ? ('0'+val) : val;
+}
+var d = new Date();
+$('[name="enquiry_number"]').val(
+    addZero(d.getDate()) + '' + addZero(d.getMonth()+1) + '' + (d.getFullYear()).toString().substring(2,2) +''+ addZero(d.getHours()) +''+ addZero(d.getMinutes()));
+
 	var product= 1;
 	var prod_count= 1;
 	$(document).on('click','.add-product',function(){

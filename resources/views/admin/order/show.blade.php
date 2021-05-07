@@ -1,6 +1,6 @@
 @extends('layouts.admin')
-@section('title', 'Staff')
-@section('nav-title', 'Staff')
+@section('title', 'Order')
+@section('nav-title', 'Order')
 @section('content')
 <div class="container-fluid">
     <div class="row">
@@ -17,15 +17,13 @@
                         <table id="datatable" class="table datatables table-bordered table-striped">
                             <thead class="text-primary">
                                 <tr>
-                                    <th>Inquery Date</th>
-                                    <th>Inquery number</th>
+                                    <th>Enquiry Date</th>
+                                    <th>Enquiry Numbe</th>
                                     <th>Tower Contract </th>
-                                    <th>Aircode 1</th>
-                                    <th>Aircode 2</th>
-                                    <th>Customer Name 1 </th>
-                                    <th>Customer Name 2 </th>
-                                    <th>Customer Email 1 </th>
-                                    <th>Address 1 </th>
+                                    <th>Eircode </th>
+                                    <th>Customer Name  </th>
+                                    <th>Customer Email  </th>
+                                    <th>Address  </th>
                                     <th>Action</th>
 
 
@@ -43,14 +41,12 @@
                                 @foreach ($orders as $order)
                                 <tr>
                                     {{--  <td>{{ $loop->iteration }}</td  --}}
-                                    <td>{{ $order->enquiry_date}}</td>
-                                    <td>{{ $order->enquiry_number}}</td>
-                                    <td>{{ $order->tower_contract}}</td>
-                                    <td>{{ $order->aircode_1}}</td>
-                                    <td>{{ $order->aircode_2}}</td>
+                                    <td>{{ $order->enquiry_date  ?? 'N/D' }}</td>
+                                    <td>{{ $order->enquiry_number  ?? 'N/D' }}</td>
+                                    <td>{{ $order->tower_contract  ?? 'N/D' }}</td>
+                                    <td>{{ $order->aircode_1  ?? 'N/D' }}</td>
                                     <td>{{ $order->cust_cont_name_1 }}</td>
-                                    <td>{{ $order->cust_cont_name_2 ?? 'N/D'}}</td>
-                                    <td>{{ $order->cust_cont_email_1 ?? 'N/D'}}</td>
+                                    <td>{{ $order->cust_cont_email_1 ?? 'N/D' }}</td>
                                     <td>{{ $order->cust_cont_address_1	 ?? 'N/D'}}</td>
 
                                     {{--  <td>{{ $order->cust_cont_email_2 ?? 'N/D'}}</td>
@@ -64,6 +60,10 @@
                                       <td>
                                         <a href="{{ route('admin.order.edit.order', $order->id) }}" rel="tooltip" class="btn btn-success btn-round" data-original-title="Edit" title="Edit">
                                             <i class="material-icons">edit</i>
+                                        </a>
+
+                                         <a onclick="deleteAlert('{{ route('admin.order.delete.order.list', $order->id) }}')"  rel="tooltip" class="btn btn-danger btn-round" style="color: white" data-original-title="Delete" title="Delete">
+                                            <i class="material-icons">delete</i>
                                         </a>
                                       </td>
                                 </tr>

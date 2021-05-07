@@ -22,6 +22,7 @@ class OrderController extends Controller
 
     public function orderCreate(Request $request)
     {
+       
     // if ($request->isMethod('post')) {
     //     $data=$request->all();
     //  echo "<pre>"; print_r($data);die;
@@ -50,7 +51,7 @@ class OrderController extends Controller
             'cust_cont_name_2'=>$request->cust_name_2,
             'cust_cont_email_2' => $request->cust_email_2,
             'cust_cont_mobile_2'=>$request->cust_mobile_2,
-            'cust_cont_address_2' =>$request->address_2,
+            'cust_cont_address_2' =>$request->cust_cont_address_2,
             'cust_cont_address_3' =>$request->sec_address_1,
             'cust_cont_address_4' =>$request->sec_address_2,
             'aircode_2'=>$request->aircode_2,
@@ -102,8 +103,9 @@ class OrderController extends Controller
     	 		'product'       =>$request->product[$i],
     	 	]);
     	 }
-
-         for ($i=0; $i < count($request->area_name)  ; $i++)
+if($request->area_name!=null)
+{
+ for ($i=0; $i < count($request->area_name)  ; $i++)
     	 {
     	 	AreaDetail::create([
     	 		'order_id'  => $order->id,
@@ -119,6 +121,8 @@ class OrderController extends Controller
                 'fit_complete'=>$request->fit_complete[$i],
     	 	]);
     	 }
+}
+
 
 for ($i=0; $i < count($request->underlay)  ; $i++)
     	 {
@@ -169,10 +173,10 @@ $orders->update([
            'enquiry_date' => $request->enquiry_date,
             'enquiry_number' => $request->enquiry_num,
             'tower_contract' => $request->staff,
-            'cust_cont_name_1' => $request->cust_name_1,
+            'cust_cont_name_1' => $request->cust_cont_name_1,
             'cust_cont_email_1' => $request->cust_email_1,
             'cust_cont_address_1' =>$request->address_1,
-            'cust_cont_mobile_1'=>$request->cust_mobile_1,
+            'cust_cont_mobile_1'=>$request->cust_cont_mobile_1,
             'aircode_1'=>$request->eircode,
             'cust_cont_name_2'=>$request->cust_name_2,
             'cust_cont_email_2' => $request->cust_email_2,
@@ -301,6 +305,13 @@ $orders->update([
 
     	return back()->with("success","Update listing successfully");
 
+    }
+
+      public function orderListDelete($id)
+    {
+    	$list = Order::find($id)->first();
+          $list->delete();
+    	return back()->with("success","Delete Order listing successfully");
     }
 
 
