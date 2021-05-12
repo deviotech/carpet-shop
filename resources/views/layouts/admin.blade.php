@@ -189,7 +189,7 @@ The above copyright notice and this permission notice shall be included in all c
         $(document).ready(function () {
             // initialise Datetimepicker
           md.initFormExtendedDatetimepickers();
-          
+
             $('.bmd-form-group').each(function(){
                 $(this).find('label').removeClass('bmd-label-floating');
                 $(this).removeClass('bmd-form-group');

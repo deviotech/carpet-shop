@@ -23,7 +23,7 @@
                         <p class="d-lg-none d-md-block">Account</p>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        {{--  <a class="dropdown-item" href="#">Profile</a>  --}}
                         <div class="dropdown-divider"></div>
 
                         <a class="dropdown-item" onclick="document.getElementById('logout-form').submit()" href="javascript:;">Log out</a>
