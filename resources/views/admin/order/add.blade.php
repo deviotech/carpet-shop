@@ -720,7 +720,7 @@
 		count++;
 		row++;
 		if(count == 10)
-                $(this).fadeOut();
+            $(this).fadeOut();
 	});
 
 	$(document).on('click', '.remove-row', function(){
