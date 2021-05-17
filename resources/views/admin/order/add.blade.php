@@ -605,62 +605,76 @@
 						</div>
 						<div class="tab-pane" id="intial_enquiry">
 
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>To measure unscheduled</label>
-											<select name="unscheduled" class="form-control unscheduled">
-												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 unscheduled_yes hidden">
-										<label>Estimate date</label>
-										<input type="text" name="un_estimate_date" class="form-control datepicker">
-									</div>
-									<div class="col-md-6">
-										<label>To Measure scheduled</label>
-										<input type="text" name="sc_estimate_date" class="form-control datepicker">
-									</div>
-									<div class="col-md-6">
-										<label>Price given to customer (Quoted)</label>
-										<input type="text" name="price" class="form-control" placeholder="Enter price, detail etc..">
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Job Agreed</label>
-											<select name="job" class="form-control job">
-												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 job_yes hidden">
-										<label>Calendar for install date</label>
-										<input type="text" name="Install_date" class="form-control datepicker">
-									</div>
-									<div class="col-md-6 job_no hidden">
-										<label>Comment</label>
-										<input type="text" name="comment" class="form-control">
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Job Schedule</label>
-											<select name="job_schedule" class="form-control job_schedule">
-												<option selected disabled>Select One</option>
-												<option value="Yes">Yes</option>
-												<option value="No">No</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-12 job_schedule_no hidden">
-										<label>Full Job Comment</label>
-										<textarea rows="3" name="full_comment" class="form-control" placeholder="Enter Full Job Comment ..."></textarea>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Status</label>
+										<select name="status" class="form-control status">
+											<option selected disabled>Select One</option>
+											<option value="intial_enquiry">Intial Enquiry</option>
+											<option value="m_unshedule">To measure unschedule</option>
+											<option value="m_schedule">To measure schedule</option>
+											<option value="p_customer">Price given to customer</option>
+											<option value="job_agreed">Job agreed: to schedule</option>
+											<option value="full_schedule">Fulll job can be scheduled</option>
+										</select>
 									</div>
 								</div>
+								<div class="col-md-6 show-on-m-unshedule hidden">
+									<div class="form-group">
+										<label>To measure unscheduled</label>
+										<select name="unscheduled" class="form-control unscheduled">
+											<option selected disabled>Select One</option>
+											<option value="Yes">Yes</option>
+											<option value="No">No</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 unscheduled_yes hidden">
+									<label>Estimate date</label>
+									<input type="text" name="un_estimate_date" class="form-control datepicker">
+								</div>
+								<div class="col-md-6 show-on-m-schedule hidden">
+									<label>To Measure scheduled</label>
+									<input type="text" name="sc_estimate_date" class="form-control datepicker">
+								</div>
+								<div class="col-md-6 show-on-p-customer hidden">
+									<label>Price given to customer (Quoted)</label>
+									<input type="text" name="price" class="form-control" placeholder="Enter price, detail etc..">
+								</div>
+								<div class="col-md-6 show-on-job-agreed hidden">
+									<div class="form-group">
+										<label>Job Agreed</label>
+										<select name="job" class="form-control job">
+											<option selected disabled>Select One</option>
+											<option value="Yes">Yes</option>
+											<option value="No">No</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-6 job_yes hidden">
+									<label>Calendar for install date</label>
+									<input type="text" name="Install_date" class="form-control datepicker">
+								</div>
+								<div class="col-md-6 job_no hidden">
+									<label>Comment</label>
+									<input type="text" name="comment" class="form-control">
+								</div>
+								<div class="col-md-6 show-on-full-schedule hidden">
+									<div class="form-group">
+										<label>Job Schedule</label>
+										<select name="job_schedule" class="form-control job_schedule">
+											<option selected disabled>Select One</option>
+											<option value="Yes">Yes</option>
+											<option value="No">No</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-12 job_schedule_no hidden">
+									<label>Full Job Comment</label>
+									<textarea rows="3" name="full_comment" class="form-control" placeholder="Enter Full Job Comment ..."></textarea>
+								</div>
+							</div>
 
 						</div>
 						<div class="tab-pane" id="payment">
@@ -718,12 +732,12 @@
 
 						</div>
 					</div>
-                    			<div class="row">
-									<div class="col-md-12">
-										<button type="submit" class="btn btn-success">Save</button>
-										<a href="" class="btn btn-danger">Close</a>
-									</div>
-								</div>
+            			<div class="row">
+							<div class="col-md-12">
+								<button type="submit" class="btn btn-success">Save</button>
+								<a href="" class="btn btn-danger">Close</a>
+							</div>
+						</div>
 
 				</div>
 			</div>
@@ -791,7 +805,7 @@ $('[name="enquiry_number"]').val(
 		count++;
 		row++;
 		if(count == 10)
-            $(this).fadeOut();
+                $(this).fadeOut();
 	});
 
 	$(document).on('click', '.remove-row', function(){
@@ -991,6 +1005,48 @@ $('[name="enquiry_number"]').val(
     	else if(balance < total)
     	{
     		$('.status').val("Part Paid");
+    	}
+    });
+    $(document).on('change','.status',function(){
+    	if($(this).val() == "m_unshedule")
+    	{
+    		$('.show-on-m-unshedule').removeClass('hidden');
+    		$('.show-on-m-shedule').addClass('hidden');
+    		$('.show-on-p-customer').addClass('hidden');
+    		$('.show-on-job-agreed').addClass('hidden');
+    		$('.show-on-full-schedule').addClass('hidden');
+    	}
+    	else if($(this).val() == "m_shedule")
+    	{
+    		$('.show-on-m-shedule').removeClass('hidden');
+    		$('.show-on-m-unshedule').addClass('hidden');
+    		$('.show-on-p-customer').addClass('hidden');
+    		$('.show-on-job-agreed').addClass('hidden');
+    		$('.show-on-full-schedule').addClass('hidden');
+    	}
+    	else if($(this).val() == "p_customer")
+    	{
+    		$('.show-on-p-customer').removeClass('hidden');
+    		$('.show-on-m-unshedule').addClass('hidden');
+    		$('.show-on-m-shedule').addClass('hidden');
+    		$('.show-on-job-agreed').addClass('hidden');
+    		$('.show-on-full-schedule').addClass('hidden');
+    	}
+    	else if($(this).val() == "job_agreed")
+    	{
+    		$('.show-on-job-agreed').removeClass('hidden');
+    		$('.show-on-m-unshedule').addClass('hidden');
+    		$('.show-on-m-shedule').addClass('hidden');
+    		$('.show-on-full-schedule').addClass('hidden');
+    		$('.show-on-job-agreed').addClass('hidden');
+    	}
+    	else if($(this).val() == "full_schedule")
+    	{
+    		$('.show-on-full-schedule').removeClass('hidden');
+    		$('.show-on-m-unshedule').addClass('hidden');
+    		$('.show-on-m-shedule').addClass('hidden');
+    		$('.show-on-job-agreed').addClass('hidden');
+    		$('.show-on-p-customer').addClass('hidden');
     	}
     });
 </script>
