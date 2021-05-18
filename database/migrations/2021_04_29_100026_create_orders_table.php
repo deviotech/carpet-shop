@@ -29,7 +29,7 @@ class CreateOrdersTable extends Migration
         $table->string('cust_cont_address_3')->nullable();
         $table->string('cust_cont_address_4')->nullable();
         $table->string('aircode_1');
-         $table->string('aircode_2');
+         $table->string('aircode_2')->nullable();
         $table->enum('area_type', ['residential', 'commercial'])->default('residential');
 
         //survay detail table

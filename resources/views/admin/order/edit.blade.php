@@ -44,81 +44,80 @@
 </style>
 @endsection
 @section('content')
-<div class="row">
-		<div class="col-md-12">
-			<div class="card">
-				<div class="card-header card-header-tabs card-header-primary">
-					<div class="nav-tabs-navigation">
-						<div class="nav-tabs-wrapper" style="font-size:30px;">
-							Information
+    <form method="POST" action="{{ route('admin.order.edit.post.order', $orders->id) }}" >
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper" style="font-size:30px;">
+                                Information
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-  <form method="POST" action="{{ route('admin.order.edit.post.order', $orders->id) }}" >
-                        <input type="hidden" name="order_id" class="form-control datepicker" value="{{ $orders->id }}">
+                    <div class="card-body">
+                            <input type="hidden" name="order_id" class="form-control datepicker" value="{{ $orders->id }}">
 
-                        @csrf
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Date of Enquiry</label>
-											<input type="text" name="enquiry_date"  value="{{ $orders->enquiry_date }}" class="form-control datepicker">
-										</div>
+                            @csrf
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Date of Enquiry</label>
+                                                <input type="text" name="enquiry_date"  value="{{ $orders->enquiry_date }}" class="form-control datepicker">
+                                            </div>
 
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Enquiry Number</label>
-											<input type="text" name="enquiry_num" readonly value="{{  $orders->enquiry_number }}" class="form-control">
-										</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Enquiry Number</label>
+                                                <input type="text" name="enquiry_num" readonly value="{{  $orders->enquiry_number }}" class="form-control">
+                                            </div>
 
 
-									</div>
+                                        </div>
 
-										<div class="col-md-4">
-										<div class="form-group">
-											<label>Tower Contract</label>
-											<select name="staff" class="form-control select2">
-												<option selected disabled>Select One..</option>
-											@foreach(stafff() as $item)
-                                                @if($orders->tower_contract == $item->id)
-                                                <option selected="" value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @else
-                                               <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                                @endif
-											@endforeach
-											</select>
-										</div>
+                                            <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Tower Contract</label>
+                                                <select name="staff" class="form-control select2">
+                                                    <option selected disabled>Select One..</option>
+                                                @foreach(stafff() as $item)
+                                                    @if($orders->tower_contract == $item->id)
+                                                    <option selected="" value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @else
+                                                   <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                    @endif
+                                                @endforeach
+                                                </select>
+                                            </div>
 
-									</div>
+                                        </div>
 
-								</div>
+                                    </div>
 
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Customer Contact Name 1</label>
-											<input type="text" name="cust_cont_name_1"   value="{{  $orders->cust_cont_name_1 }}" class="form-control">
-										</div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Customer Contact Name 1</label>
+                                                <input type="text" name="cust_cont_name_1"   value="{{  $orders->cust_cont_name_1 }}" class="form-control">
+                                            </div>
 
-									</div>
+                                        </div>
 
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>Customer Contact Mobile 1</label>
-											<input type="text" name="cust_cont_mobile_1"  value="{{  $orders->cust_cont_mobile_1 }}" class="form-control">
-										</div>
-									</div>
-								</div>
-						    </div>
-                         </div>
-                      </div>
-                  </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Customer Contact Mobile 1</label>
+                                                <input type="text" name="cust_cont_mobile_1"  value="{{  $orders->cust_cont_mobile_1 }}" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                          </div>
+        </div>
 
-
-
-	<div class="row">
+        <div class="row">
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header card-header-tabs card-header-primary">
@@ -151,7 +150,7 @@
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="#intial_enquiry" data-toggle="tab">
-										<i class="material-icons">receipt</i> Intial Enquiry
+										<i class="material-icons">receipt</i> Job Status
 										<div class="ripple-container"></div>
 									</a>
 								</li>
@@ -335,16 +334,16 @@
 			                            		<td>
 			                            			<select name="type[]" class="form-control">
 			                            				  <option  selected value="" >Select One..</option>
-			                            				<option value="wood" @if($orders->AreaDetail[0]['type'] ?? ''  == 'wood') selected @endif>Wood</option>
-			                            				<option value="lvt"  @if($orders->AreaDetail[0]['type']   ?? '' == 'lvt') selected @endif>LVT</option>
-			                            				<option value="carpet"  @if($orders->AreaDetail[0]['type']    ?? ' ' == 'carpet' ) selected @endif >Carpet</option>
+			                            				<option value="wood" @if($orders->AreaDetail[0]['type']  == 'wood') selected @endif>Wood</option>
+			                            				<option value="lvt"  @if($orders->AreaDetail[0]['type']   == 'lvt') selected @endif>LVT</option>
+			                            				<option value="carpet"  @if($orders->AreaDetail[0]['type']     == 'carpet' ) selected @endif >Carpet</option>
 			                            			</select>
 			                            		</td>
 			                            		<td>
 			                            			<select name="material[]" class="form-control">
 			                            				<option selected value="" >Select One..</option>
-			                            				<option value="rose white"  @if($orders->AreaDetail[0]['material_chosen'] ?? '' == 'rose white') selected @endif>Rose White</option>
-			                            				<option value="ulister"  @if($orders->AreaDetail[0]['material_chosen'] ?? '' == 'ulister') selected @endif>ULster</option>
+			                            				<option value="rose white"  @if($orders->AreaDetail[0]['material_chosen']  == 'rose white') selected @endif>Rose White</option>
+			                            				<option value="ulister"  @if($orders->AreaDetail[0]['material_chosen'] == 'ulister') selected @endif>ULster</option>
 			                            			</select>
 			                            		</td>
 			                            		<td>
@@ -366,8 +365,8 @@
 			                            		<td>
 			                            			<select name="fit_complete[]" class="form-control">
 			                            				<option value='' selected >Select One..</option>
-			                            				{{--  <option value="Yes" @if($orders->AreaDetail[0]['fit_complete']  == 'Yes') selected @endif>Yes</option>
-			                            				<option value="No" @if($orders->AreaDetail[0]['fit_complete']  == 'No') selected @endif>No</option>  --}}
+			                            				  <option value="Yes" @if($orders->AreaDetail[0]['fit_complete']  == 'Yes') selected @endif>Yes</option>
+			                            				<option value="No" @if($orders->AreaDetail[0]['fit_complete']  == 'No') selected @endif>No</option>
 			                            			</select>
 			                            		</td>
 			                            		<td class="remove-btn"></td>
@@ -603,11 +602,17 @@
 											<input type="text" name="rods_size" class="form-control rods_size" value="{{ $orders->rod_size }}" placeholder="Enter Rods Size">
 										</div>
 									</div>
+                                    <div class="col-md-6 rods_yes hidden">
+                                        <div class="form-group">
+                                            <label>Rods No</label>
+                                            <input type="number" min="0" name="rod_no" value="{{$orders->rod_no}}" class="form-control rods_size" placeholder="Enter Rod No">
+                                        </div>
+                                    </div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Uplift + Dispose old material</label>
 											<select name="rods" class="form-control rods">
-																<option value="Yes"  @if($orders->up_lift == 'Yes') selected @endif>Yes</option>
+                                                <option value="Yes"  @if($orders->up_lift == 'Yes') selected @endif>Yes</option>
 												<option value="No"  @if($orders->up_lift == 'No') selected @endif>No</option>
 											</select>
 										</div>
@@ -729,65 +734,91 @@
 
 						</div>
 
-					<div class="tab-pane" id="intial_enquiry">
+					    <div class="tab-pane" id="intial_enquiry">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <select name="enquiry_status" class="form-control status-initial">
+                                            <option {{$orders->job_status=='initial enquiry'?'selected':''}} value="initial enquiry">Initial Enquiry</option>
+                                            <option {{$orders->job_status=='measure unscheduled'?'selected':''}} value="measure unscheduled">To measure unscheduled</option>
+                                            <option {{$orders->job_status=='measure schedule'?'selected':''}} value="measure schedule">To measure schedule</option>
+                                            <option {{$orders->job_status=='price given to customer'?'selected':''}} value="price given to customer">Price given to customer</option>
+                                            <option {{$orders->job_status=='Job agreed: to schedule'?'selected':''}} value="Job agreed: to schedule">Job agreed: to schedule</option>
+                                            <option {{$orders->job_status=='full schedule'?'selected':''}} value="full schedule">Full job can be scheduled</option>
+                                        </select>
+                                    </div>
+                                </div>
 
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>To measure unscheduled</label>
-											<select name="unscheduled" class="form-control unscheduled">
-												<option selected disabled>Select One</option>
-												<option value="Yes" @if($orders->to_measure_unscheduled=='Yes') selected @endif>Yes</option>
-												<option value="No"  @if($orders->to_measure_unscheduled=='No') selected @endif>No</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 unscheduled_yes hidden">
-										<label>Estimate date</label>
-										<input type="text" name="un_estimate_date" value="{{ $orders->estimate_date }}"  class="form-control datepicker">
-									</div>
-									<div class="col-md-6">
-										<label>To Measure scheduled</label>
-										<input type="text" name="sc_estimate_date"  value="{{ $orders->to_measure_scheduled }}" class="form-control datepicker">
-									</div>
-									<div class="col-md-6">
-										<label>Price given to customer (Quoted)</label>
-										<input type="text" name="price" class="form-control"   value="{{ $orders->to_price_quoted }}" placeholder="Enter price, detail etc..">
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Job Agreed</label>
-											<select name="job" class="form-control job">
-												<option selected value="">Select One</option>
-												<option value="Yes" @if($orders->job_agreed=='Yes') selected @endif>Yes</option>
-												<option value="No" @if($orders->job_agreed=='Yes') selected @endif>No</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-6 job_yes hidden">
-										<label>Calendar for install date</label>
-										<input type="text" name="Install_date" value="{{ $orders->calendar_for_install_date }}" class="form-control datepicker">
-									</div>
-									<div class="col-md-6 job_no hidden">
-										<label>Comment</label>
-										<input type="text" name="comment" class="form-control" value="{{ $orders->comment }}">
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Job Schedule</label>
-											<select name="job_schedule" class="form-control job_schedule">
-												<option selected disabled>Select One</option>
-												<option value="Yes" @if($orders->job_schedule=='Yes') selected @endif>Yes</option>
-												<option value="No"  @if($orders->job_schedule=='No') selected @endif>No</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-md-12 job_schedule_no hidden">
-										<label>Full Job Comment</label>
-										<textarea rows="3" name="full_comment"  value="{{ $orders->full_comment }}"class="form-control" placeholder="Enter Full Job Comment ..."></textarea>
-									</div>
-								</div>
+                                <section class="show-on-m-unshedule hidden col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6 ">
+                                            <div class="form-group">
+                                                <label>To measure unscheduled</label>
+                                                <select name="unscheduled" class="form-control unscheduled">
+                                                    <option selected disabled>Select One</option>
+                                                    <option {{$orders->to_measure_unscheduled=='Yes'?'selected':''}} value="Yes">Yes</option>
+                                                    <option {{$orders->to_measure_unscheduled=='No'?'selected':''}} value="No">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 unscheduled_yes hidden">
+                                            <label>Estimate date</label>
+                                            <input type="text" value="{{$orders->estimate_date}}" name="estimate_date" class="form-control datepicker">
+                                        </div>
+                                    </div>
+                                </section>
 
+                                <div class="col-md-6 show-on-schedule hidden">
+                                    <label>To Measure scheduled</label>
+                                    <input type="text" value="{{$orders->to_measure_scheduled}}" name="sc_estimate_date" class="form-control datepicker">
+                                </div>
+                                <div class="col-md-6 show-on-p-customer hidden">
+                                    <label>Price given to customer (Quoted)</label>
+                                    <input type="text" value="{{$orders->to_price_quoted}}" name="price" class="form-control" placeholder="Enter price, detail etc..">
+                                </div>
+                                <section class="show-on-job-agreed hidden col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6 ">
+                                            <div class="form-group">
+                                                <label>Job Agreed</label>
+                                                <select name="job" class="form-control job">
+                                                    <option selected disabled>Select One</option>
+                                                    <option {{$orders->job_agreed=='Yes'?'selected':''}} value="Yes">Yes</option>
+                                                    <option {{$orders->job_agreed=='No'?'selected':''}}  value="No">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 job_yes hidden">
+                                            <label>Calendar for install date</label>
+                                            <input type="text" value="{{$orders->calendar_for_install_date}}" name="Install_date" class="form-control datepicker">
+                                        </div>
+                                        <div class="col-md-6 job_no hidden">
+                                            <label>Comment</label>
+                                            <input type="text" value="{{$orders->comment}}" name="comment" class="form-control">
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="show-on-full-schedule hidden col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6 ">
+                                            <div class="form-group">
+                                                <label>Job Schedule</label>
+                                                <select name="job_schedule" class="form-control job_schedule">
+                                                    <option selected disabled>Select One</option>
+                                                    <option {{$orders->job_schedule=='Yes'?'selected':''}} value="Yes">Yes</option>
+                                                    <option {{$orders->job_schedule=='No'?'selected':''}}  value="No">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 job_schedule_no hidden">
+                                            <label>Full Job Comment</label>
+                                            <textarea rows="3"  name="full_comment" class="form-control" placeholder="Enter Full Job Comment ...">{!! $orders->full_comment !!}</textarea>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            </div>
 						</div>
 						<div class="tab-pane" id="payment">
 
@@ -812,26 +843,26 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Payment Comment</label>
+											<label>Initial Deposit Comment</label>
 											<input type="text" name="int_comment" class="form-control" value="{{ $orders->payment_comment_intial  }}" placeholder="Enter Comment Here..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Additonal Payments</label>
+											<label>Additional Payments</label>
 											<input type="number" name="additional_payment" value="{{ $orders->additional_payment  }}" class="form-control additonal" placeholder="Enter Additonal Payment..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label>Payment Comment</label>
+											<label>Additional Payment Comment</label>
 											<input type="text" name="add_comment" class="form-control" value="{{ $orders->payment_comment_additional	  }}" placeholder="Enter Comment Here..">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
 											<label>Balance Due</label>
-											<input type="number" name="add_comment" class="form-control balance" value="{{ $orders->balance_due }}" readonly>
+											<input type="number" name="balance_due" class="form-control balance" value="{{ $orders->balance_due }}" readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -844,17 +875,18 @@
 
 						</div>
 					</div>
-                    								<div class="row">
+                    <div class="row">
 									<div class="col-md-12">
 										<button type="submit" class="btn btn-success">Save</button>
 										<a href="" class="btn btn-danger">Close</a>
 									</div>
 								</div>
-                    </form>
+
 				</div>
 			</div>
 		</div>
 	</div>
+    </form>
 @endsection
 @section('js')
 <script>
@@ -904,21 +936,9 @@
 	            // md.initFormExtendedDatetimepickers();
 	            $('#t-row-'+(row+1)).find('.count').text(count+1);
 	            $('#t-row-'+(row+1)).find('.remove-btn').append('<button type="button" class="remove-row btn btn-sm btn-danger"><i class="fa fa-times"></i></button>');
-	            $('.datepicker').datetimepicker({
-				      format: 'MM/DD/YYYY',
-				      icons: {
-				        time: "fa fa-clock-o",
-				        date: "fa fa-calendar",
-				        up: "fa fa-chevron-up",
-				        down: "fa fa-chevron-down",
-				        previous: 'fa fa-chevron-left',
-				        next: 'fa fa-chevron-right',
-				        today: 'fa fa-screenshot',
-				        clear: 'fa fa-trash',
-				        close: 'fa fa-remove'
-				      }
-				    });
-		}
+            $('#t-row-'+(row+1)).find(".datepicker").datetimepicker({format:"MM/DD/YYYY",icons:{time:"fa fa-clock-o",date:"fa fa-calendar",up:"fa fa-chevron-up",down:"fa fa-chevron-down",previous:"fa fa-chevron-left",next:"fa fa-chevron-right",today:"fa fa-screenshot",clear:"fa fa-trash",close:"fa fa-remove"}});
+
+        }
 		count++;
 		row++;
 		if(count == 10)
@@ -1125,5 +1145,106 @@
     		$('.status').val("Part Paid");
     	}
     });
+    $(document).on('change','.status-initial',function(){
+        if($(this).val() == "measure unscheduled")
+        {
+            $('.show-on-m-unshedule').removeClass('hidden');
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if($(this).val()=='initial enquiry')
+        {
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if($(this).val() == "measure schedule")
+        {
+            $('.show-on-schedule').removeClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if($(this).val() == "price given to customer")
+        {
+            $('.show-on-p-customer').removeClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if($(this).val() == "Job agreed: to schedule")
+        {
+            $('.show-on-job-agreed').removeClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if($(this).val() == "full schedule")
+        {
+            $('.show-on-full-schedule').removeClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+        }
+    });
+    $(document).ready(function () {
+        let valu=$('.status-initial').val();
+        if(valu == "measure unscheduled")
+        {
+            $('.show-on-m-unshedule').removeClass('hidden');
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if(valu=='initial enquiry')
+        {
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if(valu == "measure schedule")
+        {
+            $('.show-on-schedule').removeClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if(valu == "price given to customer")
+        {
+            $('.show-on-p-customer').removeClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if(valu == "Job agreed: to schedule")
+        {
+            $('.show-on-job-agreed').removeClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+            $('.show-on-full-schedule').addClass('hidden');
+        }
+        else if(valu == "full schedule")
+        {
+            $('.show-on-full-schedule').removeClass('hidden');
+            $('.show-on-m-unshedule').addClass('hidden');
+            $('.show-on-schedule').addClass('hidden');
+            $('.show-on-job-agreed').addClass('hidden');
+            $('.show-on-p-customer').addClass('hidden');
+        }
+    })
 </script>
 @endsection

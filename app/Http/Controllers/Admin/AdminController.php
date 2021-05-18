@@ -15,4 +15,9 @@ class AdminController extends Controller
             // dd($Staff_count);
     	return view('admin.dashboard',get_defined_vars());
     }
+
+    public function index()
+    {
+        return redirect()->route('login');
+    }
 }

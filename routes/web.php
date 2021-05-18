@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/auth.php';
-	    	// Route::get('/', 'StaffController@login');
+	    	 Route::get('/', 'Admin\AdminController@index');
 
 // Route::middleware(['admin'])->group(function () {
 	Route::name('admin.')->prefix('admin')->namespace('Admin')->middleware(['auth'])->group(function() {
@@ -28,6 +28,7 @@ require __DIR__.'/auth.php';
             Route::get('edit/{id?}', 'OrderController@edit')->name('edit.order');
             Route::post('edit/post/{id?}', 'OrderController@update')->name('edit.post.order');
             Route::get('delete/order/{id?}', 'OrderController@orderListDelete')->name('delete.order.list');
+            Route::get('pdf/{id?}', 'OrderController@orderPDF')->name('pdf');
 
 
 		});

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use Barryvdh\DomPDF\Facade as PDF;
 use view;
 use App\Models\Staff;
 use Illuminate\Http\Request;
@@ -22,11 +23,6 @@ class OrderController extends Controller
 
     public function orderCreate(Request $request)
     {
-
-    // if ($request->isMethod('post')) {
-    //     $data=$request->all();
-    //  echo "<pre>"; print_r($data);die;
-    // // }
       $request->validate([
                 'enquiry_date' => 'required',
                 'enquiry_number' => 'required',
@@ -36,7 +32,7 @@ class OrderController extends Controller
                 'cust_cont_address_1' => 'required',
                 'cust_cont_email_1' => 'required',
                 'cust_cont_mobile_1' => 'required',
-                'aircode_2'=>'required',
+
             ]);
 
     $order = Order::create([
@@ -57,7 +53,7 @@ class OrderController extends Controller
             'aircode_2'=>$request->aircode_2,
             'area_type'=>$request->area_type,
             'sub_floor_type'=>$request->floor_type,
-            'build_type'=>$request->binding,
+            'build_type'=>$request->build_type,
             'moisture_read_need'=>$request->moisture,
             'moisture_read_per'=>$request->moisture_per,
             'underfloor_heating'=>$request->underfloor,
@@ -71,11 +67,12 @@ class OrderController extends Controller
             'runner'=>$request->runner,
             'binding_type'=>$request->binding,
             'rod'=>$request->rodes,
+            'rod_no'=>$request->rod_no,
             'rod_type'=>$request->rods_type,
             'rod_size'=>$request->rods_size,
             'up_lift'=>$request->rods,
             'to_measure_unscheduled'=>$request->unscheduled,
-            'estimate_date'=>$request->un_estimate_date,
+            'estimate_date'=>$request->estimate_date,
             'to_measure_scheduled'=>$request->sc_estimate_date,
             'to_price_quoted'=>$request->price,
             'job_agreed'=>$request->job,
@@ -89,8 +86,9 @@ class OrderController extends Controller
             'payment_comment_intial'=>$request->int_comment,
             'additional_payment'=>$request->additional_payment,
             'payment_comment_additional'=>$request->add_comment,
-            'balance_due'=>$request->add_comment,
+            'balance_due'=>$request->balance_due,
             'status'=>$request->status,
+            'job_status'=>$request->enquiry_status,
 
         ]);
 
@@ -150,7 +148,7 @@ for ($i=0; $i < count($request->trim)  ; $i++)
     {
 
 
-        $orders=Order::get();
+        $orders=Order::orderBy('created_at','DESC')->get();
 
         return view('admin.order.show',get_defined_vars());
 
@@ -166,10 +164,24 @@ for ($i=0; $i < count($request->trim)  ; $i++)
 
     }
 
-public function update($id,Request $request)
+    public function update($id,Request $request)
     {
-$orders=Order::where('id',$id)->first();
-$orders->update([
+
+
+        $request->validate([
+            'enquiry_date' => 'required',
+            'enquiry_num' => 'required',
+            'staff' => 'required',
+            'eircode' => 'required',
+            'cust_cont_name_1'=>'required',
+            'address_1' => 'required',
+            'cust_email_1' => 'required',
+            'cust_cont_mobile_1' => 'required',
+
+        ]);
+
+    $orders=Order::where('id',$id)->first();
+    $orders->update([
            'enquiry_date' => $request->enquiry_date,
             'enquiry_number' => $request->enquiry_num,
             'tower_contract' => $request->staff,
@@ -203,9 +215,10 @@ $orders->update([
             'rod'=>$request->rodes,
             'rod_type'=>$request->rods_type,
             'rod_size'=>$request->rods_size,
+            'rod_no'=>$request->rod_no,
             'up_lift'=>$request->rods,
             'to_measure_unscheduled'=>$request->unscheduled,
-            'estimate_date'=>$request->un_estimate_date,
+            'estimate_date'=>$request->estimate_date,
             'to_measure_scheduled'=>$request->sc_estimate_date,
             'to_price_quoted'=>$request->price,
             'job_agreed'=>$request->job,
@@ -219,8 +232,9 @@ $orders->update([
             'payment_comment_intial'=>$request->int_comment,
             'additional_payment'=>$request->additional_payment,
             'payment_comment_additional'=>$request->add_comment,
-            'balance_due'=>$request->add_comment,
+            'balance_due'=>$request->balance_due,
             'status'=>$request->status,
+        'job_status'=>$request->enquiry_status,
 
         ]);
 //materialdetail table
@@ -248,6 +262,7 @@ $orders->update([
                         $areaDetail[$i]->delete();
                     }
                 }
+
                 $Detailarea = count($request->area_name);
                 for ($i = 0; $i <$Detailarea; $i++) {
                     $schedule =  new AreaDetail();
@@ -309,9 +324,17 @@ $orders->update([
 
       public function orderListDelete($id)
     {
-    	$list = Order::find($id)->first();
-          $list->delete();
+    	$list = Order::find($id);
+        $list->delete();
     	return back()->with("success","Delete Order listing successfully");
+    }
+
+    public function orderPDF($id)
+    {
+        $order = Order::find($id);
+        set_time_limit(600);
+        $pdf=PDF::loadView('pdf.measure_pdf',['order'=>$order])->setPaper('a4','landscape');
+        return $pdf->download('Measure PDF.pdf');
     }
 
 

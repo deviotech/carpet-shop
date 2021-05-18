@@ -22,6 +22,12 @@ use Illuminate\Support\Facades\Mail;
         return Staff::all();
     }
 
+    function tower_contract($id)
+    {
+        $tower_contract=Staff::where('id',$id)->first();
+        return $tower_contract;
+    }
+
 
 
 

@@ -1,14 +1,3 @@
-<!--
-=========================================================
-Material Dashboard PRO - v2.1.2
-=========================================================
-
-Product Page: https://www.creative-tim.com/product/material-dashboard-pro
-Copyright 2020 Creative Tim (https://www.creative-tim.com)
-Coded by Creative Tim
-
-=========================================================
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,8 +14,9 @@ The above copyright notice and this permission notice shall be included in all c
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <link href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" /> -->
     <!-- CSS Files -->
+{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />--}}
+
     <link href="{{ asset('admin_theme') }}/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
     <style>
         .h1,
@@ -154,7 +144,6 @@ The above copyright notice and this permission notice shall be included in all c
     <script src="{{ asset('admin_theme') }}/assets/js/plugins/bootstrap-selectpicker.js"></script>
     <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
     <script src="{{ asset('admin_theme') }}/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> -->
     <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
     <script src="{{ asset('admin_theme') }}/assets/js/plugins/jquery.dataTables.min.js"></script>
     <script src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
@@ -173,6 +162,7 @@ The above copyright notice and this permission notice shall be included in all c
     <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('admin_theme') }}/assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"></script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>--}}
 
     {{-- Alert Messages --}}
     @if(session('success'))
@@ -188,6 +178,13 @@ The above copyright notice and this permission notice shall be included in all c
 
         $(document).ready(function () {
             // initialise Datetimepicker
+            var dateToday = new Date();
+            // $('.date').datepicker
+            // ({
+            //     format: 'dd/mm/yyyy',
+            //     autoclose: true,
+            //
+            // });
           md.initFormExtendedDatetimepickers();
 
             $('.bmd-form-group').each(function(){
